@@ -5,12 +5,11 @@
      <h4><strong>MY ORDERS</strong></h4><hr>
      <strong>PENDING ORDERS</strong>
       <div id="ordersbtn">
-            <a href="{{route('dashboard.CompletedTransaction')}}" class="btn btn-success" style="margin-bottom:1rem">Completed transactions</a>
-            <a href="{{route('users.orders-dashboard')}}" class="btn btn-info" style="margin-bottom:1rem">Cancelled Orders</a>
+            <a href="{{route('myaccount.CompletedTransactionsOfBuyer')}}" class="btn btn-success" style="margin-bottom:1rem">Completed transactions</a>
+            <!-- <a href="{{route('myaccount.CancelledOrderOfBuyer')}}" class="btn btn-info" style="margin-bottom:1rem">Cancelled Orders</a> -->
       </div>
             <div class="container-fluid px-5 py-5 mx-auto">
                 <div class="row  px-3">
-        @if(count($orders_to_confirm) == 0)
             @foreach ($orders_to_confirm as $order_item)
               @if($order_item->status == "isPending")
                     <div class="block text-center"> <img class="image" src="/storage/uploads/cropImage/{{$order_item->crop_image}}">
@@ -41,10 +40,8 @@
                           </div>
                         </div>
               @endif
+
             @endforeach
-          @else
-            <p>You have no pending orders yet.</p>
-          @endif
                       </div>
                     </div>
 <div class="panel panel-default panel-order">
@@ -75,7 +72,7 @@
                         <div class="info py-2 px-2">
                           <div class="row px-3">
                             
-                                <a class="btn btnrec cart3" type="button" href="{{route('dashboard.DeliveredOrder', ['deli_id'=> $order_item->io_id])}}">CONTACT FARMER</a>
+                                <a class="btn btnrec cart3" type="button" href="/chat">CONTACT FARMER</a>
                             
                               </div>
                               <div class="text-left">
@@ -133,8 +130,8 @@
                         <div class="info py-2 px-2">
                           <div class="row px-3">
                             
-                                <a class="btn btnrec cart4" type="button" href="{{route('dashboard.DeliveredOrder', ['deli_id'=> $order_item->io_id])}}">REPORT</a>
-                                <a class="btn order3" type="button" href="{{route('dashboard.DeliveredOrder', ['deli_id'=> $order_item->io_id])}}">RECEIVED</a>
+                                <a class="btn btnrec cart4" type="button" href="{{route('myaccount.ReportOrder', ['repo_id'=> $order_item->io_id])}}">REPORT</a>
+                                <a class="btn order3" type="button" href="{{route('myaccount.ReceivedOrder', ['rece_id'=> $order_item->io_id])}}">RECEIVED</a>
                             
                               </div>
                               <div class="text-left">

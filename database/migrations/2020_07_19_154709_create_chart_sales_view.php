@@ -27,6 +27,7 @@ class CreateChartSalesView extends Migration
         FROM
             posts
         GROUP BY posts.crop_name
+        ORDER BY totalkgsold DESC
         ");
     }
 

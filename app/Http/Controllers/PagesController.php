@@ -9,7 +9,9 @@ use App\totalChart;
 use App\Charts\postsChart;
 use App\Charts\spanChart;
 use App\cropSalesChart;
+use App\cropSalesChart2;
 use Charts;
+use App\CropList;
 use DB;
 use App\Charts\productsChart;
 
@@ -81,7 +83,14 @@ class PagesController extends Controller
         $salesPercentage = cropSalesChart::orderBy('crop_name')
         ->pluck('totalpercentage','crop_name');
 
-        $top10 = cropSalesChart::orderBy('crop_name','desc')->get();
+        $top6 = cropSalesChart::all()->take(6);
+        $top12 = cropSalesChart::skip(6)->take(6)->get();
+        $top10 = cropSalesChart::all()->take(12);
+        $defaultImg = CropList::all();
+        $top6qty = cropSalesChart2::all()->take(6);
+        $top6qty12 = cropSalesChart2::all()->take(12);
+        $top12qty = cropSalesChart2::skip(6)->take(6)->get();
+
 
        $salesChart = new postsChart;
         $salesChart->labels($salesKg->keys());
@@ -105,14 +114,20 @@ class PagesController extends Controller
         // ->dimensions(1000, 500)
         // ->colors(['red', 'green', 'blue', 'yellow', 'orange', 'cyan', 'magenta'])
         // ->groupByMonth(date('Y'), true);
-        //$posts = Post::orderBy('created_at','desc')->get();
+        //$posts = Post::orderBy('created_at','top6qty12')->get();
         return view('pages.index')
         ->with('posts', $posts)
         ->with('user_lands', $user_lands)
         ->with('$totalQty', $totalQty)
         ->with('chart', $chart)
         ->with('salesChart', $salesChart)
+        ->with('top6', $top6)
+        ->with('top12', $top12)
+        ->with('top6qty', $top6qty)
+        ->with('top12qty', $top12qty)
+        ->with('top6qty12', $top6qty12)
         ->with('top10', $top10)
+        ->with('defaultImg', $defaultImg)
         ->with('allPosts', $totalQty);
     }
 

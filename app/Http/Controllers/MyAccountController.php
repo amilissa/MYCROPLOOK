@@ -191,6 +191,59 @@ class MyAccountController extends Controller
     }
 
 //////////////// my orders naaaa ///////////////////////////
+
+private static function smsgateway($phone, $message) {
+
+
+    $array_fields['phone_number'] = $phone;
+
+    $array_fields['message'] = $message;
+
+    $array_fields['device_id'] = 116705;
+
+    //$array_fields['device_id'] = 110460;
+
+    $token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJhZG1pbiIsImlhdCI6MTU4Njg4ODI5MiwiZXhwIjo0MTAyNDQ0ODAwLCJ1aWQiOjc5MzUxLCJyb2xlcyI6WyJST0xFX1VTRVIiXX0.39zv2kxgafe6MjVor4UA-gjKYa8G_KihJTIxZOeiess";
+
+//       $token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJhZG1pbiIsImlhdCI6MTU1MzY3OTM1MSwiZXhwIjo0MTAyNDQ0ODAwLCJ1aWQiOjY5NTM0LCJyb2xlcyI6WyJST0xFX1VTRVIiXX0.jVJXqJFhLuAXP3Jgc4kIz1jteChBcgvVdORKK3mn9IQ";
+
+    //$token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJhZG1pbiIsImlhdCI6MTU1Mzk2MTYzNywiZXhwIjo0MTAyNDQ0ODAwLCJ1aWQiOjYwOTQwLCJyb2xlcyI6WyJST0xFX1VTRVIiXX0.Ci7Pt7jTerxqDco_9UcQFOfGmRYr3N4-gwXC-oIJPDc";
+
+
+    $curl = curl_init();
+
+    curl_setopt_array($curl, array(
+        CURLOPT_URL => "https://smsgateway.me/api/v4/message/send",
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => "",
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 30,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => "POST",
+        CURLOPT_POSTFIELDS => "[  " . json_encode($array_fields) . "]",
+        CURLOPT_HTTPHEADER => array(
+            "authorization: $token",
+            "cache-control: no-cache"
+        ),
+    ));
+    curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+
+    $response = curl_exec($curl);
+    $err = curl_error($curl);
+
+    curl_close($curl);
+
+//        if ($err) {
+//            echo "cURL Error #:" . $err;
+//        } else {
+//            echo $response;
+//        }
+
+
+}
+
+
+
 public function myOrders()
 {
     if(!Gate::allows('isBuyer')){
@@ -228,6 +281,53 @@ public function getCancelledOrders($canc_id)
     ->with('success', 'Order Cancelled!')
     ->with('orders_to_confirm', $orders_to_confirm);
 }
+public function getReceivedOrders($rece_id)
+{
+    if(!Gate::allows('isBuyer')){
+        abort(404, 'Sorry, the page you are looking for could not be found');
+    }
+    $indi_order = IndividualOrder::find($rece_id);
+    $indi_order->status = "isReceived";
+    
+    $indi_order->save();
+    
+    $current_user_id = auth()->user()->id;
+    $orders_to_confirm = IndividualOrder::where('user_id', $current_user_id)->get();
+    return redirect()->route('myorders')
+    ->with('success', 'Order Received!')
+    ->with('orders_to_confirm', $orders_to_confirm);
+}
+public function getReportOrders($repo_id)
+{
+    if(!Gate::allows('isBuyer')){
+        abort(404, 'Sorry, the page you are looking for could not be found');
+    }
+    $indi_order = IndividualOrder::find($repo_id);
+    $indi_order->status = "isReported";
+    
+    $indi_order->save();
+    
+    $current_user_id = auth()->user()->id;
+    $orders_to_confirm = IndividualOrder::where('user_id', $current_user_id)->get();
+    return redirect()->route('myorders')
+    ->with('success', 'Order Reported!')
+    ->with('orders_to_confirm', $orders_to_confirm);
+}
+public function getCompletedTransactionsOfBuyer()
+{
+    if(!Gate::allows('isBuyer')){
+        abort(404, 'Sorry, the page you are looking for could not be found');
+    }
+
+    $current_user_id = auth()->user()->id;
+    $fs_info = postsUP::groupBy('id')->get();
+    $alltranss = IndividualOrder::where('buyers_id', $current_user_id)->get();
+    return view('users/completed-transactions-for-buyers')
+    ->with('farmers_info', $fs_info)
+    ->with('alltranss', $alltranss);
+}
+
+
 
 
 public function getUserInvoice($orders_id)

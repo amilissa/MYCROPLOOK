@@ -4214,6 +4214,9 @@ input[type=button].btn-block {
   background-color: #e9ecef;
 }
 
+.grandchild {
+  float: left;
+}
 .custom-file-input:lang(en) ~ .custom-file-label::after {
   content: "Browse";
 }
@@ -4960,6 +4963,32 @@ input[type=button].btn-block {
 .navbar-dark .navbar-text a:focus {
   color: #fff;
 }
+.card2 {
+  position: relative;
+  display: flex;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 0.25rem;
+}
+
+@media (min-width: 100px) {
+  .card-deck2 {
+    display: flex;
+  }
+
+  .card-deck2 .card2 {
+    flex: 1 0 0%;
+    margin-bottom: 0;
+  }
+}
+
+
+.card-body2 {
+  flex: 1 1 auto;
+  min-height: 1px;
+
+}
 
 .card {
   position: relative;
@@ -4972,6 +5001,7 @@ input[type=button].btn-block {
   border: 1px solid rgba(0, 0, 0, 0.125);
   border-radius: 0.25rem;
 }
+
 
 .card > hr {
   margin-right: 0;
@@ -6682,12 +6712,19 @@ a.close.disabled {
 
 .carousel {
   position: relative;
+  
 }
 
 .carousel.pointer-event {
   touch-action: pan-y;
 }
 
+
+.carousel-item {
+  display: table;
+  text-align: center;
+  vertical-align: middle;
+}
 .carousel-inner {
   position: relative;
   width: 100%;
@@ -6762,6 +6799,7 @@ a.close.disabled {
 
 .carousel-control-prev,
 .carousel-control-next {
+
   position: absolute;
   top: 0;
   bottom: 0;
@@ -6772,7 +6810,7 @@ a.close.disabled {
   width: 15%;
   color: #fff;
   text-align: center;
-  opacity: 0.5;
+  opacity: 1.5;
   transition: opacity 0.15s ease;
 }
 
@@ -6787,7 +6825,6 @@ a.close.disabled {
 .carousel-control-prev:focus,
 .carousel-control-next:hover,
 .carousel-control-next:focus {
-  color: #fff;
   text-decoration: none;
   outline: 0;
   opacity: 0.9;
