@@ -75,6 +75,7 @@
                       @endforeach
                   @endforeach
       
+<!-- amilissa cute -->
     </div>
     <div class="carousel-item row">
                       @foreach ($top12qty as $indexKey => $top)
