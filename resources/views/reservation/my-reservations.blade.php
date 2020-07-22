@@ -26,7 +26,7 @@
 								 							<div class="product-info">
 									 							<div><strong>Price: </strong><span class="value">₱ {{ $post['item']['crop_price'] }} /kg</span></div>
 									 							<div><strong>Description: </strong><span class="value">{{ $post['item']['crop_desc'] }}</span></div>
-                                                                <div><strong>Harvest Period: </strong><span class="value">{{ $post['item']['startHarvestMonth'] }} {{ $post['item']['startHarvestYear'] }} - {{ $post['item']['endHarvestMonth'] }} {{ $post['item']['endHarvestYear'] }}</span></div><div><strong>Description: </strong><span class="value">{{ $post['item']['crop_desc'] }}</span></div>
+                                                                <div><strong>Harvest Period: </strong><span class="value">{{ $post['item']['startHarvestMonth'] }} {{ $post['item']['startHarvestYear'] }} - {{ $post['item']['endHarvestMonth'] }} {{ $post['item']['endHarvestYear'] }}</span></div>
                                                                 {{-- <div><strong>Grower: </strong><span class="value">{{$post->user->name}}</span></div> --}}
 
 

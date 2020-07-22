@@ -19,22 +19,31 @@
                                 <th>Crop</th>
                                 <th>Total Qty</th>
                                 <th>Total Price</th>
-								<th>Buyer's name</th>
-								<th>Buyer's number</th>
+								<th>Farmer's name & Company</th>
+								<th>Farmer's number</th>
 								<th>Crop Status</th>
 								<th>Date completed</th>
 							</tr>
 						</thead>
 						<tbody>
-                        @foreach ($alltrans as $alltran)
-                        @if($alltran->status == "isDelivered" || $alltran->status == "isReceived")
+
+						
+						@foreach ($alltranss as $alltran)
+                        @if($alltran->status == "isReceived")
+
 							<tr>
 								<td>{{$alltran->io_id}}</td>
 								<td>{{$alltran->crop_name}}</td>
 								<td>{{$alltran->qty}}</td>
-								<td>{{$alltran->price}}</td>
-								<td>{{$alltran->orders_buyer_name}}</td>
-								<td>{{$alltran->orders_mobile_no}}</td>
+                                <td>{{$alltran->price}}</td>
+                                @foreach ($farmers_info as $farmer_info)
+                            @if($farmer_info->id == $alltran->user_id)
+								<td>{{$farmer_info->first_name}} {{$farmer_info->middle_name}} {{$farmer_info->last_name}} -  {{$farmer_info->name_of_company}} </td>
+                                <td>{{$farmer_info->mobile_no}}</td>
+                                
+                            @else
+                            @endif
+                            @endforeach
 								<td>{{$alltran->status}}</td>
 								<td>{{$alltran->updated_at}}</td>
 							</tr>

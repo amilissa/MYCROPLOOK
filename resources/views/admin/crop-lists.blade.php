@@ -18,9 +18,13 @@ padding-top: 20px;">
                         <div class="form-group">
                             {{Form::text('crop_name', '', ['class' => 'form-control', 'placeholder' => 'Name of Crop'])}}
 
+
+                                            <i class="fa fa-camera-retro fa-lg"></i>  {{Form::file('default_cropImage')}}
+
                         </div>
                         <div class="col-12 text-right">
                             {{form::submit('Add Crop', ['class' => 'btn btn-primary'])}}
+                         
 
                             {!! Form::close() !!}
                         </div>
@@ -46,6 +50,7 @@ padding-top: 20px;">
                     <tr>
                         <td>
                             <span>{{$crop->crop_name}}</span><br>
+                            <img class="col-12 mlr0 mt15" style="display:block; width:100%; height: 100px;" src="/storage/uploads/croplists/{{$crop->default_cropImage}}">
                         </td>
 
                         <td>

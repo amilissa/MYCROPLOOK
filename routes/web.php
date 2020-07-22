@@ -74,11 +74,27 @@ Route::get('/users/declining/{decl_id}',
 ['uses' => 'DashboardController@getDeclinedOrders',
 'as' => 'dashboard.DeclinedOrder']);
 
-// click sa decline orders 
+// click sa cancel orders 
 Route::get('/users/cancelling/{canc_id}',
 ['uses' => 'MyAccountController@getCancelledOrders',
 'as' => 'myaccount.CancelledOrder']);
 
+// click sa report orders 
+Route::get('/users/reporting/{repo_id}',
+['uses' => 'MyAccountController@getReportOrders',
+'as' => 'myaccount.ReportOrder']);
+
+// click sa received orders 
+Route::get('/users/receiving/{rece_id}',
+['uses' => 'MyAccountController@getReceivedOrders',
+'as' => 'myaccount.ReceivedOrder']);
+
+
+// click sa Completed Transaction of Buyers
+Route::get('/users/completed-transactions-for-buyers/', ['uses' => 'MyAccountController@getCompletedTransactionsOfBuyer', 'as' => 'myaccount.CompletedTransactionsOfBuyer']);
+
+// click sa Cancelled orders 
+Route::get('/users/cancelled-orders-for-buyers/', ['uses' => 'MyAccountController@getCancelledOrdersView', 'as' => 'myaccount.CancelledOrderOfBuyer']);
 
 
 //click sa completed orders by farmers

@@ -56,13 +56,30 @@ public function create()
     {
         //
         $this->validate($request, [
-            'crop_name' => 'required|unique:croplist'
-
+            'crop_name' => 'required|unique:croplist',
+            'default_cropImage' => 'required|Image'
         ]);
 
+
+        //handle file upload
+
+        if($request->hasFile('default_cropImage')){
+            //get the filename with the extension
+            $filenameWithExt = $request->file('default_cropImage')->getClientOriginalName();
+            //get just filename
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            //get just extension
+            $extension= $request->file('default_cropImage')->getClientOriginalExtension();
+            $filenameToStore = $filename.'_'.time().'.'.$extension;
+            // upload image
+            $path = $request->file('default_cropImage')->storeAs('public/uploads/croplists/', $filenameToStore);
+
+        } else{
+        }
         //create post
         $crop = new CropList;
         $crop->crop_name = $request->input('crop_name');
+        $crop->default_cropImage = $filenameToStore;
         $crop->save();
 
         return redirect('/admin/crop-lists')->with('success', 'Crop Created');

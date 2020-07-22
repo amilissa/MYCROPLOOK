@@ -180,6 +180,7 @@ public function getCompletedTransaction()
     
     $current_user_id = auth()->user()->id;
     $alltrans = IndividualOrder::where('user_id', $current_user_id)->get();
+    
     return view('users/completed-transactions')
 ->with('alltrans', $alltrans);
 }
