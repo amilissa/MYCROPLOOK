@@ -89,6 +89,14 @@
                             </div>
                         </div>
 
+                        <div class="form-group row">
+
+                            <div class="col-md-4"></div>
+                            <div class="col-md-7">
+                                <p class="_58mv">
+                                    <small><input type="checkbox" style="position: relative" name="terms" value="Agreed"/> By clicking Register, you agree to our <a href="{{route('terms.agreement')}}">terms and conditions</a>. You may receive SMS Notifications from us.</p></small>
+                            </div>
+                            </div>
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">

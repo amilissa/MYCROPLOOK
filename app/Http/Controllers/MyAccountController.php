@@ -10,6 +10,7 @@ use App\postsUP;
 use App\User;
 use App\Lands;
 use App\BillingInfo;
+use App\DeliveryInfo;
 use App\Reservation;
 use App\Order;
 use App\IndividualOrder;
@@ -130,7 +131,7 @@ class MyAccountController extends Controller
     public function getDeliveryAddress()
     {
         $current_user_id = auth()->user()->id;
-        $user_profile = User::where('id', $current_user_id)->get();
+        $user_profile = DeliveryInfo::where('user_id', $current_user_id)->get();
         return view('users.delivery-info')->with('user_profile', $user_profile);
     }
 
@@ -173,6 +174,39 @@ class MyAccountController extends Controller
             ->with('success', 'User Profile Updated!')
             ->with('user_profile', $user_profile);
     }
+    public function updateDeliveryInfo(Request $request, $del_id)
+    {
+
+        $current_user_id = auth()->user()->id;
+        $user_profile = User::where('id', $current_user_id)->get();
+
+
+        $this->validate($request, [
+            'del_address' => 'required',
+            'del_brgy' => 'required',
+            'del_city' => 'required',
+            'del_province' => 'required',
+            'del_zipcode' => 'required',
+            'del_country' => 'required',
+            'del_others' => 'required'
+        ]);
+
+        //update user
+        $delivery = DeliveryInfo::find($del_id);
+        $delivery->del_address = $request->input('del_address');
+        $delivery->del_brgy = $request->input('del_brgy');
+        $delivery->del_city = $request->input('del_city');
+        $delivery->del_province = $request->input('del_province');
+        $delivery->del_zipcode = $request->input('del_zipcode');
+        $delivery->del_country = $request->input('del_country');
+        $delivery->del_others = $request->input('del_others');
+        $delivery->save();
+
+        return redirect('/users/user-profile')
+            ->with('success', 'User Profile Updated!')
+            ->with('user_profile', $user_profile);
+    }
+
 
 
     public function getOrderHistory()

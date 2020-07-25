@@ -39,7 +39,7 @@
                                                     <div class="col-md-4">
 							 						<div class="w-100 quantity">
                                                          <div class="" style="height: 50px"><span class="centerspan">
-                                                            <label for="quantity">Quantity:</label>
+                                                            <label for="quantity">KG:</label>
                                                          <span class="badge bg-dark text-white">{{ $post['qty']}}</span>
                                                             <a href="{{ route('reservation.removeItem', ['id' => $post['item']['id']])}}"- type="button" class="btn btn-outline-danger btn-sm">
                                                                 <i class="fa fa-trash" aria-hidden="true"></i>

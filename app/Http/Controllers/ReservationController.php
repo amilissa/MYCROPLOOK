@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DeliveryInfo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Post;
@@ -103,12 +104,21 @@ class ReservationController extends Controller
         if (!Session::has('reservation')) {
             return view('reservation.my-reservations');
         }
+
+        $current_user_id = auth()->user()->id;
+        $user_profile = User::where('id', $current_user_id)->get();
+        $user_delivery = DeliveryInfo::where('user_id', $current_user_id)->get();
+
         $oldReservation = Session::get('reservation');
         $reservation = new Reservation($oldReservation);
 
         $total = $reservation->totalPrice;
-        return view('reservation.checkout', ['total' => $total, 'posts' => $reservation->posts]);
+        return view('reservation.checkout', [
+            'total' => $total, 'posts' => $reservation->posts,
+            'user_profile' => $user_profile,  'user_delivery' => $user_delivery
+        ]);
     }
+
     private static function smsgateway($phone, $message)
     {
 
@@ -168,14 +178,17 @@ class ReservationController extends Controller
             return back()->with('error', 'Sorry, One of the Crops in your Cart is no Longer Available!');
         }
 
+
+
+
         $oldReservation = Session::get('reservation');
         $reservation = new Reservation($oldReservation);
         $order = new Order();
         $order->orders_reservation = serialize($reservation);
-        $order->orders_buyer_name = $request->input('o_name');
-        $order->orders_address = $request->input('o_address');
-        $order->orders_mobile_no = $request->input('o_mobile_no');
-        $order->orders_farmer_id = $request->input('o_mobile_no');
+        $order->orders_buyer_name = $request->input('fullName');
+        $order->orders_address = $request->input('completeAddress');
+        $order->orders_mobile_no = $request->input('mobile_no');
+        $order->orders_farmer_id = $request->input('mobile_no');
 
 
         Auth::user()->orders()->save($order);
@@ -207,8 +220,12 @@ class ReservationController extends Controller
             $indi_order->endHarvestMonth = $product->endHarvestMonth;
             $indi_order->endHarvestDay = $product->endHarvestDay;
             $indi_order->endHarvestYear = $product->endHarvestYear;
+            $order->mode_of_payment = $request->input('ModeOfPayment');
+            $order->expected_amount = $request->input('ExpectedPaymentAmount');
             $indi_order->status = "isPending";
             $indi_order->save();
+
+
 
             $buyer_sms = User::where('id', $product->user_id)->get();
             $result = $buyer_sms->first();

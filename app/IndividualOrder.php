@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class IndividualOrder extends Model
 {
-  protected $fillable = ['status'];
+    protected $fillable = ['status', 'mode_of_payment', 'expected_amount'];
     //table name
     protected $table = 'individual_orders';
     //primary key
@@ -15,7 +15,8 @@ class IndividualOrder extends Model
     public $timestamps = true;
 
 
-    public function user(){
-      return $this->belongsTo('App\User');
-  }
-  }
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
+}

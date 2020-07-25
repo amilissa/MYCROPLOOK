@@ -57,9 +57,10 @@ class RegisterController extends Controller
             'first_name' => ['string', 'max:255'],
             'middle_name' => ['string', 'max:255'],
             'last_name' => ['string', 'max:255'],
-            'mobile_no' => ['required', 'string', 'max:20'],
+            'mobile_no' => ['required', 'string', 'max:50'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'terms' => ['required'],
         ]);
     }
 
@@ -94,17 +95,15 @@ class RegisterController extends Controller
             'show_user' => $show_user,
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'terms' => $data['terms'],
         ]);
-        if ('register_as' == 2) {
-            BillingInfo::create([
-                'user_id' => $user->id
-            ]);
+        BillingInfo::create([
+            'user_id' => $user->id
+        ]);
 
-            DeliveryInfo::create([
-                'user_id' => $user->id
-            ]);
-        } else {
-        }
+        DeliveryInfo::create([
+            'user_id' => $user->id
+        ]);
 
         return $user;
     }

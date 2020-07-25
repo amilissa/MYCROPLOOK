@@ -148,4 +148,9 @@ class PagesController extends Controller
         $title = "Home Page";
         return view('pages.homepage')->with('title', $title);
     }
+    public function getTermsAndAgreement()
+    {
+
+        return view('croplook-terms-and-conditions');
+    }
 }

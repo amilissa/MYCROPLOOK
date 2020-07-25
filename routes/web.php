@@ -20,6 +20,7 @@ Route::get('/users/order-history', ['uses' => 'MyAccountController@getOrderHisto
 
 
 Route::post('users/{bil_id}/billing-info', 'MyAccountController@updateBillingInfo')->name('users.billing-info');
+Route::post('users/{del_id}/delivery-info', 'MyAccountController@updateDeliveryInfo')->name('users.delivery-info');
 
 //click sa reserve crop
 Route::get(
@@ -29,6 +30,15 @@ Route::get(
         'as' => 'reservation.startReservation', 'middleware' => 'auth'
     ]
 );
+//terms and agreement
+Route::get(
+    '/croplook-terms-and-conditions',
+    [
+        'uses' => 'PagesController@getTermsAndAgreement',
+        'as' => 'terms.agreement'
+    ]
+);
+
 
 //click sa reservations
 Route::get(
