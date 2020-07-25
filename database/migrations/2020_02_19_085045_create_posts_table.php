@@ -20,8 +20,21 @@ class CreatePostsTable extends Migration
             $table->string('crop_desc');
             $table->integer('crop_quantity');
             $table->string('crop_status');
+            $table->string('crop_image');
+            $table->integer('user_id');
+            $table->double('kilogram_sold');
+            $table->integer('fixed_quantity');
+            $table->integer('production_cost');
+            $table->integer('crop_profitability');
+            $table->integer('earnings');
+            $table->string('percentage_sold_before_harvest');
+            $table->string('startHarvestMonth');
+            $table->string('startHarvestDay');
+            $table->string('startHarvestYear');
+            $table->string('endHarvestMonth');
+            $table->string('endHarvestDay');
+            $table->string('endHarvestYear');
             $table->timestamps();
-
         });
     }
 

@@ -15,12 +15,12 @@ class CreateChartSales2View extends Migration
     {
         \DB::statement("
     CREATE VIEW chart_sales2 AS
-    SELECT 
+    SELECT
         posts.crop_name AS crop_name,
-        SUM(posts.fixed_quantity::decimal) AS totalfixedqty,
-        SUM(posts.crop_quantity::decimal) AS totalavailableqty,
-        SUM(posts.kilogram_sold::decimal) AS totalkgsold,
-        AVG(ROUND(posts.percentage_sold_before_harvest::decimal,
+        SUM(posts.fixed_quantity) AS totalfixedqty,
+        SUM(posts.crop_quantity) AS totalavailableqty,
+        SUM(posts.kilogram_sold) AS totalkgsold,
+        AVG(ROUND(posts.percentage_sold_before_harvest,
                 1)) AS totalpercentage,
         created_at
     FROM
@@ -28,7 +28,7 @@ class CreateChartSales2View extends Migration
     GROUP BY posts.crop_name
     ORDER BY totalavailableqty DESC
     ");
-}
+    }
 
     /**
      * Reverse the migrations.

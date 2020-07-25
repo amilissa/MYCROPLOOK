@@ -79,7 +79,7 @@
                     <div>
                         <div class="card align-items-center border-none">
                             <div class="mt20">
-                                <img style="background:#4B524E; width:100px; height:100px; border-radius:58.5px;" src="/storage/uploads/userImage/{{$farm->user_image}}">
+                                <img style="background:#4B524E; width:100px; height:100px; border-radius:58.5px;" src="/storage/uploads/userImage/no-image.jpg">
                             </div>
                             <div class="card-body pt15 pb0 title-md align-center">
                                 <h5 class="mb0 title-md">{{$farm->first_name}} {{$farm->middle_name}} {{$farm->last_name}}</h5>
@@ -295,7 +295,7 @@
                                 <div class="plr15">
                                     <div class="card m15 border-none">
                                     <a href="/explore-farms/{{$allFarm->land_id}}">
-                                        <img class="card-img-top" src="/storage/uploads/userImage/{{$allFarm->user_image}}" alt="Explore Image">
+                                        <img class="card-img-top" src="/storage/uploads/userImage/no-image.jpeg" alt="Explore Image">
                                             <div class="card-body p0">
                                                 {{-- <ul class="info-address">
                                                     <li class="info-item">

@@ -1,4 +1,4 @@
-@extends('layouts.app')
+{{-- @extends('layouts.app')
 
 @section('content')
 
@@ -15,7 +15,6 @@
                                 </div>
                                 <div class="box-body">
                                     <div class="row">
-                                        @if(count($user_profile) > 0)
                                         @foreach ($user_profile as $current_user)
                                         {!! Form::open(['action' => ['MyAccountController@update', $current_user->user_profile_id], 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
                                                     <div class="col-12 col-md-8 mt10 mb30" style="font-size: 14px">
@@ -145,4 +144,4 @@
                 </div>
             </div>
         </div>
-@endsection
+@endsection --}}

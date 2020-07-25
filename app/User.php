@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name','register_as','mobilenumber', 'email', 'password', 'user_image',
+        'first_name', 'middle_name', 'last_name', 'register_as', 'mobile_no', 'email', 'password',
     ];
 
     /**
@@ -37,68 +37,95 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function posts(){
+    public function posts()
+    {
         return $this->hasMany('App\Post');
     }
-    public function userProfile(){
+    public function userProfile()
+    {
         return $this->hasMany('App\userProfile');
     }
-    public function userProfiles(){
-        return $this->hasMany('App\userProfiles');
-    }
-    public function Land(){
+
+
+    public function Land()
+    {
         return $this->hasMany('App\Land');
     }
-    public function PostandFarmer(){
+    public function BillingInfo()
+    {
+        return $this->hasMany('App\BillingInfo');
+    }
+    public function DeliveryInfo()
+    {
+        return $this->hasMany('App\DeliveryInfo');
+    }
+    public function PostandFarmer()
+    {
         return $this->hasMany('App\PostandFarmer');
     }
-    public function farmProducts(){
+    public function farmProducts()
+    {
         return $this->hasMany('App\farmProducts');
     }
-    public function orders(){
+    public function orders()
+    {
         return $this->hasMany('App\Order');
     }
-    public function reservations(){
+    public function reservations()
+    {
         return $this->hasMany('App\Reservation');
     }
-    public function totalChart(){
+    public function totalChart()
+    {
         return $this->hasMany('App\totalChart');
-
-    }   public function Earning(){
+    }
+    public function Earning()
+    {
         return $this->hasMany('App\Earning');
     }
 
-   public function BuyersofCrop(){
-    return $this->hasMany('App\BuyersofCrop');
-}
-public function cropSalesChart(){
-    return $this->hasMany('App\cropSalesChart');
-}
-public function cropSalesChart2(){
-    return $this->hasMany('App\cropSalesChart');
-}
-public function farmerChart(){
-    return $this->hasMany('App\farmerChart');
-}
-public function farmerTotalQty(){
-    return $this->hasMany('App\farmerTotalQty');
-}
-public function postsUP(){
-    return $this->hasMany('App\postUP');
-}
-public function Profile(){
-    return $this->hasMany('App\Profile');
-}
-public function CropList(){
-    return $this->hasMany('App\CropList');
-}
-public function individual_orders(){
-    return $this->hasMany('App\IndividualOrder');
-}
-public function DashboardProfit(){
-    return $this->hasMany('App\DashboardProfit');
-}
-public function OrderConfirmation(){
-    return $this->hasMany('App\OrderConfirmation');
-}
+    public function BuyersofCrop()
+    {
+        return $this->hasMany('App\BuyersofCrop');
+    }
+    public function cropSalesChart()
+    {
+        return $this->hasMany('App\cropSalesChart');
+    }
+    public function cropSalesChart2()
+    {
+        return $this->hasMany('App\cropSalesChart');
+    }
+    public function farmerChart()
+    {
+        return $this->hasMany('App\farmerChart');
+    }
+    public function farmerTotalQty()
+    {
+        return $this->hasMany('App\farmerTotalQty');
+    }
+    public function postsUP()
+    {
+        return $this->hasMany('App\postUP');
+    }
+    public function Profile()
+    {
+        return $this->hasMany('App\Profile');
+    }
+    public function CropList()
+    {
+        return $this->hasMany('App\CropList');
+    }
+    public function individual_orders()
+    {
+        return $this->hasMany('App\IndividualOrder');
+    }
+    public function DashboardProfit()
+    {
+        return $this->hasMany('App\DashboardProfit');
+    }
+    public function OrderConfirmation()
+    {
+        return $this->hasMany('App\OrderConfirmation');
+    }
 }

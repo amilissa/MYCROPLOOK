@@ -197,7 +197,7 @@
                     <div class="card align-items-center border-none">
                         <div class="mt20">
                             <div >
-                                <img  style="background:#4B524E; width:80px; height:80px; border-radius:40px;" src="/storage/uploads/userImage/{{$farm->user_image}}">
+                                <img  style="background:#4B524E; width:80px; height:80px; border-radius:40px;" src="/storage/uploads/userImage/no-image.jpeg">
                             </div>
                         </div>
                         <div class="card-body pt15 pb0">

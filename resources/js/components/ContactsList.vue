@@ -1,54 +1,62 @@
 <template>
     <div class="contacts-list">
         <ul>
-
-            <li v-for="contact in sortedContacts" :key="contact.id" @click="selectContact(contact)" :class="{ 'selected': contact == selected }">
+            <li
+                v-for="contact in sortedContacts"
+                :key="contact.id"
+                @click="selectContact(contact)"
+                :class="{ selected: contact == selected }"
+            >
                 <div class="avatar">
-                    <img v-bind:src="'/storage/uploads/userImage/' + contact.user_image" :alt="contact.name">
+                    <img v-bind:src="" :alt="contact.name" />
                 </div>
                 <div class="contact">
                     <p class="name">{{ contact.name }}</p>
                     <p class="email">{{ contact.email }}</p>
                 </div>
-                <span class="unread" v-if="contact.unread"> {{ contact.unread }}</span>
+                <span class="unread" v-if="contact.unread">
+                    {{ contact.unread }}</span
+                >
             </li>
         </ul>
     </div>
 </template>
 
 <script>
-    export default {
-        props: {
-            contacts: {
-                type: Array,
-                default: []
-            }
-        },
-        data() {
-            return {
-                selected: this.contacts.length ? this.contacts[0] : null
-            };
-        },
-        methods: {
-            selectContact(contact) {
-                this.selected = contact;
+export default {
+    props: {
+        contacts: {
+            type: Array,
+            default: []
+        }
+    },
+    data() {
+        return {
+            selected: this.contacts.length ? this.contacts[0] : null
+        };
+    },
+    methods: {
+        selectContact(contact) {
+            this.selected = contact;
 
-                this.$emit('selected', contact);
-            }
-        },
-        computed: {
-            sortedContacts() {
-                return _.sortBy(this.contacts, [(contact) => {
+            this.$emit("selected", contact);
+        }
+    },
+    computed: {
+        sortedContacts() {
+            return _.sortBy(this.contacts, [
+                contact => {
                     if (contact == this.selected) {
                         return Infinity;
-                    return contact.unread;
+                        return contact.unread;
                     }
 
                     return contact.unread;
-                }]).reverse();
-            }
+                }
+            ]).reverse();
         }
     }
+};
 </script>
 
 <style lang="scss" scoped>
@@ -59,6 +67,7 @@
     overflow: scroll;
     border-left: 1px solid #a6a6a6;
 
+    font-size: 15px;
     ul {
         list-style-type: none;
         padding-left: 0;
@@ -103,10 +112,12 @@
                     margin: 0 auto;
                 }
             }
-
+            .name {
+                font-size: 15px;
+            }
             .contact {
                 flex: 3;
-                font-size: 10px;
+                font-size: 20px;
                 overflow: hidden;
                 display: flex;
                 flex-direction: column;
@@ -114,9 +125,11 @@
 
                 p {
                     margin: 0;
-
+                    font-size: 30px;
                     &.name {
                         font-weight: bold;
+
+                        font-size: 15px;
                     }
                 }
             }

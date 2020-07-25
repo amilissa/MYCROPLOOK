@@ -16,13 +16,17 @@
           <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
           <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
           <li data-target="#carouselExampleIndicators" data-slide-to="5"></li>
+          <li data-target="#carouselExampleIndicators" data-slide-to="6"></li>
         </ol>
         <div class="carousel-inner">
           <div class="carousel-item active">
-            <img class="d-block w-100" src="/storage/uploads/banners/banner1.jpg" alt="First slide">
+            <img class="d-block w-100" src="/storage/uploads/banners/banner0.jpg" alt="First slide">
           </div>
           <div class="carousel-item">
             <img class="d-block w-100" src="/storage/uploads/banners/banner2.jpg" alt="Second slide">
+          </div>
+          <div class="carousel-item">
+            <img class="d-block w-100" src="/storage/uploads/banners/banner1.jpg" alt="Second slide">
           </div>
           <div class="carousel-item">
             <img class="d-block w-100" src="/storage/uploads/banners/banner3.jpg" alt="Third slide">
@@ -48,6 +52,60 @@
     <h5 >Barangay Kapatagan Agricultural Trading Portal with Real-Time SMS Notification for Crop-Growth Monitoring</h5>
    </div> --}}
 
+   <div class="row">
+    <div class="col-md-6 col-sm-6">
+         <h4>TOP 12 BEST SELLING CROPS</h4>
+     </div>
+ </div>
+
+<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+<div class="carousel-inner" style="margin-left: 8%">
+ <div class="carousel-item active">
+ @foreach ($top6 as $indexKey => $top)
+                       @foreach ($defaultImg as $default)
+                       @if($default->crop_name == $top->crop_name)
+                   <div class="col-2 row grandchild">
+                       <div class="col-4 grandchild">
+                           <h1  style="font-size:55px;">{{ ++$indexKey }}</h1>
+                       </div>
+                       <div class="col-8 grandchild">
+                       <img style="height: 100px;" class="d-block w-100" src="/storage/uploads/croplists/{{$default->default_cropImage}}">
+                       <small class="text-muted">{{$top->totalkgsold}} KG</small>
+                       </div>
+                   </div>
+               @endif
+                   @endforeach
+               @endforeach
+
+ </div>
+ <div class="carousel-item row">
+ <small style="color: white">{{$indexKey = 6}}</small>
+ @foreach ($top12 as $top)
+                       @foreach ($defaultImg as $default)
+                       @if($default->crop_name == $top->crop_name)
+                   <div class="col-2 row grandchild">
+                       <div class="col-4 grandchild">
+                           <h1  style="font-size:55px;">{{ ++$indexKey }}</h1>
+                       </div>
+                       <div class="col-8 grandchild">
+                       <img style="height: 100px;" class="img-responsive" src="/storage/uploads/croplists/{{$default->default_cropImage}}">
+                       <small class="text-muted">{{$top->totalkgsold}} KG</small>
+                       </div>
+                   </div>
+               @endif
+                   @endforeach
+               @endforeach
+ </div>
+</div>
+<a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+ <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+ <span class="sr-only">Previous</span>
+</a>
+<a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+ <span class="carousel-control-next-icon" aria-hidden="true"></span>
+ <span class="sr-only">Next</span>
+</a>
+</div>
 
    <div class="row">
        <div class="col-md-6 col-sm-6">
@@ -59,7 +117,7 @@
   <div class="carousel-inner" style="margin-left: 8%">
     <div class="carousel-item active">
     @foreach ($top6qty as $indexKey => $top)
-    
+
                           @foreach ($defaultImg as $default)
                           @if($default->crop_name == $top->crop_name)
                       <div class="center col-2 row grandchild">
@@ -68,17 +126,18 @@
                           </div>
                           <div class="col-8 grandchild">
                           <img style="height: 100px;" class="d-block w-100" src="/storage/uploads/croplists/{{$default->default_cropImage}}">
-                          <small class="text-muted">{{$top->totalAvailableQty}} KG</small>
+                          <small class="text-muted">{{$top->totalavailableqty}} KG</small>
                           </div>
                       </div>
                   @endif
                       @endforeach
                   @endforeach
-      
+
 <!-- amilissa cute -->
     </div>
     <div class="carousel-item row">
-                      @foreach ($top12qty as $indexKey => $top)
+        <small style="color:white;">{{$indexKey = 6}}</small>
+                      @foreach ($top12qty as $top)
                           @foreach ($defaultImg as $default)
                           @if($default->crop_name == $top->crop_name)
                       <div class="col-2 row grandchild">
@@ -87,13 +146,13 @@
                           </div>
                           <div class="col-8 grandchild">
                           <img style="height: 100px;" class="img-responsive" src="/storage/uploads/croplists/{{$default->default_cropImage}}">
-                          <small class="text-muted">{{$top->totalAvailableQty}} KG</small>
+                          <small class="text-muted">{{$top->totalavailableqty}} KG</small>
                           </div>
                       </div>
                   @endif
                       @endforeach
                   @endforeach
-    </div>
+    </small>
   </div>
   <a class="carousel-control-prev" href="#carouselExampleControls1" role="button" data-slide="prev">
     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -104,61 +163,8 @@
     <span class="sr-only">Next</span>
   </a>
 </div>
-               
 
-   <div class="row">
-       <div class="col-md-6 col-sm-6">
-            <h4>TOP 12 BEST SELLING CROPS</h4>
-        </div>
-    </div>
 
-   <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-  <div class="carousel-inner" style="margin-left: 8%">
-    <div class="carousel-item active">
-    @foreach ($top6 as $top)
-                          @foreach ($defaultImg as $default)
-                          @if($default->crop_name == $top->crop_name)
-                      <div class="col-2 row grandchild">
-                          <div class="col-4 grandchild">
-                              <h1  style="font-size:55px;">{{ $loop->iteration }}</h1>
-                          </div>
-                          <div class="col-8 grandchild">
-                          <img style="height: 100px;" class="d-block w-100" src="/storage/uploads/croplists/{{$default->default_cropImage}}">
-                          <small class="text-muted">{{$top->totalKgSold}} KG SOLD</small>
-                          </div>
-                      </div>
-                  @endif
-                      @endforeach
-                  @endforeach
-      
-    </div>
-    <div class="carousel-item row">
-    @foreach ($top12 as $top)
-                          @foreach ($defaultImg as $default)
-                          @if($default->crop_name == $top->crop_name)
-                      <div class="col-2 row grandchild">
-                          <div class="col-4 grandchild">
-                              <h1  style="font-size:55px;">{{ $loop->iteration }}</h1>
-                          </div>
-                          <div class="col-8 grandchild">
-                          <img style="height: 100px;" class="img-responsive" src="/storage/uploads/croplists/{{$default->default_cropImage}}">
-                          <small class="text-muted">{{$top->totalKgSold}} KG SOLD</small>
-                          </div>
-                      </div>
-                  @endif
-                      @endforeach
-                  @endforeach
-    </div>
-  </div>
-  <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-  </a>
-  <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  </a>
-</div>
 
 
 <hr>
@@ -166,7 +172,7 @@
        <div class="flex col-md-6">
              {!! $chart->container() !!}
         </div>
-        
+
     <div class="flex col-md-6">
         {!! $salesChart->container() !!}
     </div>
@@ -181,7 +187,7 @@
         </div>
         <div class="col-md-6 col-sm-6">
             <a class="a-see-all" href="/explore-products" class="pull-right">
-                                    
+
                 See All<i  class="fa fa-chevron-right" aria-hidden="true"></i></a>
         </div>
 
@@ -212,10 +218,10 @@
          </div>
          <div class="col-md-6 col-sm-6">
              <a class="a-see-all" href="/explore-farms" class="pull-right">
-                                     
+
                  See All<i  class="fa fa-chevron-right" aria-hidden="true"></i></a>
          </div>
- 
+
      </div>
     <div class="card-deck">
          @if(count($user_lands) > 0)

@@ -16,6 +16,7 @@ class CreateCroplistTable extends Migration
         Schema::create('croplist', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->text('crop_name');
+            $table->text('default_cropImage');
             $table->timestamps();
         });
     }

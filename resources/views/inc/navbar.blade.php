@@ -1,5 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="margin-bottom:2rem">
-    <div class="container">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="margin-bottom:2rem; padding-left:8rem;">
         <a class="navbar-brand" href="{{ url('/') }}">
             CROPLOOK
         </a>
@@ -131,5 +130,4 @@
 
             </ul>
         </div>
-    </div>
 </nav>

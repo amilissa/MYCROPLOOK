@@ -20,6 +20,9 @@ use Illuminate\Support\Str;
 $factory->define(User::class, function (Faker $faker) {
     return [
         'name' => $faker->name,
+        'firstname' => $faker->first_name,
+        'middlename' => $faker->middle_name,
+        'last_name' => $faker->last_name,
         'email' => $faker->unique()->safeEmail,
         'email_verified_at' => now(),
         'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
@@ -28,15 +31,15 @@ $factory->define(User::class, function (Faker $faker) {
 });
 
 $factory->define(App\Message::class, function (Faker $faker) {
-    do{
+    do {
         $from = rand(1, 6);
         $to = rand(1, 6);
-    }
-    while ($from == $to);
+    } while ($from == $to);
 
 
     return [
         'from' => $from,
         'to' => $to,
-        'text' => $faker->sentence    ];
+        'text' => $faker->sentence
+    ];
 });

@@ -2,19 +2,18 @@
 
 namespace App;
 
-use App\User;
-
-
 use Illuminate\Database\Eloquent\Model;
 
-class userProfiles extends Model
+class DeliveryInfo extends Model
 {
+
+    protected $fillable = ['user_id'];
     //table name
-    protected $table = 'users';
+    protected $table = 'delivery_info';
     //primary key
-    public $primaryKey = 'id';
+    public $primaryKey = 'del_id';
     //timestamps
-    public $timestamps = true;
+    public $timestamps = false;
 
 
     public function user()

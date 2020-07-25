@@ -2,19 +2,17 @@
 
 namespace App;
 
-use App\User;
-
-
 use Illuminate\Database\Eloquent\Model;
 
-class userProfiles extends Model
+class BillingInfo extends Model
 {
+    protected $fillable = ['user_id'];
     //table name
-    protected $table = 'users';
+    protected $table = 'billing_info';
     //primary key
-    public $primaryKey = 'id';
+    public $primaryKey = 'bil_id';
     //timestamps
-    public $timestamps = true;
+    public $timestamps = false;
 
 
     public function user()
