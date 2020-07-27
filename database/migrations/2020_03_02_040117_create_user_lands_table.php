@@ -19,7 +19,7 @@ class CreateUserLandsTable extends Migration
             $table->string('land_address');
             $table->string('land_area');
             $table->string('land_elevation');
-            $table->string('user_id');
+            $table->integer('user_id');
             $table->string('land_image');
             $table->timestamps();
         });

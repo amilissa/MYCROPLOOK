@@ -28,9 +28,8 @@ class CreateViewUserLandsUserProfileView extends Migration
         user_lands.land_id AS land_id
     FROM
         user_lands
-
         LEFT JOIN
-        users ON user_lands.user_id = users.id
+        users ON user_lands.user_id = users.id::integer
         ");
     }
 
