@@ -40,7 +40,7 @@ class CreateViewUsersPostsUpUlView extends Migration
             user_lands ON users.id = user_lands.user_id
 
         LEFT JOIN
-            posts ON users.id = posts.user_id
+            posts ON users.id::integer = posts.user_id::integer
         ");
     }
 
