@@ -16,13 +16,13 @@ class CreateBillingInfoTable extends Migration
         Schema::create('billing_info', function (Blueprint $table) {
             $table->bigIncrements('bil_id');
             $table->integer('user_id');
-            $table->string('bil_address');
-            $table->string('bil_brgy');
-            $table->string('bil_city');
-            $table->string('bil_province');
-            $table->integer('bil_zipcode');
-            $table->string('bil_country');
-            $table->string('bil_others');
+            $table->string('bil_address')->nullable();
+            $table->string('bil_brgy')->nullable();
+            $table->string('bil_city')->nullable();
+            $table->string('bil_province')->nullable();
+            $table->integer('bil_zipcode')->nullable();
+            $table->string('bil_country')->nullable();
+            $table->string('bil_others')->nullable();
         });
     }
 

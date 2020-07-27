@@ -16,13 +16,13 @@ class CreateDeliveryInfoTable extends Migration
         Schema::create('delivery_info', function (Blueprint $table) {
             $table->bigIncrements('del_id');
             $table->integer('user_id');
-            $table->string('del_address');
-            $table->string('del_brgy');
-            $table->string('del_city');
-            $table->string('del_province');
-            $table->integer('del_zipcode');
-            $table->string('del_country');
-            $table->string('del_others');
+            $table->string('del_address')->nullable();
+            $table->string('del_brgy')->nullable();
+            $table->string('del_city')->nullable();
+            $table->string('del_province')->nullable();
+            $table->integer('del_zipcode')->nullable();
+            $table->string('del_country')->nullable();
+            $table->string('del_others')->nullable();
             $table->timestamps();
         });
     }
