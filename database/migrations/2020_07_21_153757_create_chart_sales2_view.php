@@ -25,7 +25,7 @@ class CreateChartSales2View extends Migration
         created_at
     FROM
         posts
-    GROUP BY posts.crop_name
+    GROUP BY posts.crop_name, posts.created_at
     ORDER BY totalavailableqty DESC
     ");
     }
