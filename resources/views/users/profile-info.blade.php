@@ -16,7 +16,7 @@
 
                     <li><a class="btn btn-info btn-block" type="button"  href="{{route('buyers.prof-info')}}" class="">Profile Information</a> </li>
                     <li><a class="btn btn-info btn-block" type="button" href="{{route('buyers.delivery-add')}}" class="">Delivery Address</a> </li>
-                    <li><a class="btn btn-info btn-block" type="button" href="{{route('buyers.billing-add')}}" class="">Billing Address</a></li>
+                    {{-- <li><a class="btn btn-info btn-block" type="button" href="{{route('buyers.billing-add')}}" class="">Billing Address</a></li> --}}
                     <li><a class="btn btn-info btn-block" type="button" href="{{route('buyers.order-history')}}" class="">Order History</a> </li>
                 {{-- <li><a href="{{route('users.prod-stat')}}" class="">Change Password</a></li> --}}
                 </ul>

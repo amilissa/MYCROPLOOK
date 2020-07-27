@@ -14,7 +14,7 @@
 
           <li><a class="btn btn-info btn-block" href="{{route('buyers.prof-info')}}" class="">Profile Information</a> </li>
           <li><a class="btn btn-info btn-block" href="{{route('buyers.delivery-add')}}" class="">Delivery Address</a> </li>
-          <li><a class="btn btn-info btn-block" href="{{route('buyers.billing-add')}}" class="">Billing Address</a></li>
+          {{-- <li><a class="btn btn-info btn-block" href="{{route('buyers.billing-add')}}" class="">Billing Address</a></li> --}}
           <li><a class="btn btn-info btn-block" href="{{route('buyers.order-history')}}" class="">Order History</a> </li>
           {{-- <li><a href="{{route('users.prod-stat')}}" class="">Change Password</a></li> --}}
         </ul>
@@ -28,7 +28,7 @@
 
       <div class="my-account">
 
-        <form id="frmRegister" action="https://www.palengkeboy.com/do-update-customer-profile" method="post" enctype="multipart/form-data" class="form-horizontal">
+        {{-- <form id="frmRegister" action="https://www.palengkeboy.com/do-update-customer-profile" method="post" enctype="multipart/form-data" class="form-horizontal">
 
             <input type="hidden" id="_token" name="_token" value="vHbYmvYOheZchP9HpqvAhVoJy0nS3qdC3BO4jmmJ">
 
@@ -91,7 +91,7 @@
               </div>
             </fieldset>
 
-        </form>
+        </form> --}}
 
       </div>
     </div>

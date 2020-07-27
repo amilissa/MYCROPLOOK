@@ -37,7 +37,6 @@ class CreateIndividualOrdersTable extends Migration
             $table->string('orders_buyer_name');
             $table->string('orders_address');
             $table->string('orders_mobile_no');
-            $table->string('buyer_number');
             $table->string('status');
 
             $table->timestamps();

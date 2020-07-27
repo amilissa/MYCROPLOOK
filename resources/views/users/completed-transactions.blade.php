@@ -9,7 +9,7 @@
 				<div class="panel panel-primary">
 					<div class="panel-heading">
 						<h4 class="panel-title">Completed Transactions</h4>
-						
+
 					</div>
 
 					<table class="table table-hover" id="dev-table">
@@ -27,7 +27,7 @@
 						</thead>
 						<tbody>
                         @foreach ($alltrans as $alltran)
-                        @if($alltran->status == "isDelivered" || $alltran->status == "isReceived")
+                        @if($alltran->status == "Delivered" || $alltran->status == "isReceived")
 							<tr>
 								<td>{{$alltran->io_id}}</td>
 								<td>{{$alltran->crop_name}}</td>
@@ -38,7 +38,7 @@
 								<td>{{$alltran->status}}</td>
 								<td>{{$alltran->updated_at}}</td>
 							</tr>
-                        
+
                             @endif
                         @endforeach
 						</tbody>

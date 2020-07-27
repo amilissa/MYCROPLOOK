@@ -12,6 +12,7 @@ use App\farmerChart;
 use App\DashboardProfit;
 use App\Order;
 use App\IndividualOrder;
+use App\DeliverySchedule;
 use DB;
 use Charts;
 use Gate;
@@ -117,18 +118,32 @@ class DashboardController extends Controller
     }
 
 
-    public function getConfirmedOrders($conf_id)
+    public function getConfirmedOrders(Request $request, $conf_id)
     {
         if (!Gate::allows('isFarmer')) {
             abort(404, 'Sorry, the page you are looking for could not be found');
         }
-        $indi_order = IndividualOrder::find($conf_id);
-        $indi_order->status = "isConfirmed";
 
+        $this->validate($request, [
+            'expected_del_date' => 'required'
+
+        ]);
+
+
+
+        $delsched = DeliverySchedule::find($conf_id);
+        $delsched->expected_del_date = $request->input('expected_del_date');
+         $delsched->save();
+
+        $indi_order = IndividualOrder::find($conf_id);
+        $indi_order->status = "Confirmed";
         $indi_order->save();
+
+
 
         $current_user_id = auth()->user()->id;
         $orders_to_confirm = IndividualOrder::where('user_id', $current_user_id)->get();
+
 
         return redirect()->route('users.orders-dashboard')
             ->with('success', 'Order Confirmed!')
@@ -140,7 +155,7 @@ class DashboardController extends Controller
             abort(404, 'Sorry, the page you are looking for could not be found');
         }
         $indi_order = IndividualOrder::find($decl_id);
-        $indi_order->status = "isDeclined";
+        $indi_order->status = "Declined";
 
         $indi_order->save();
 
@@ -157,12 +172,13 @@ class DashboardController extends Controller
             abort(404, 'Sorry, the page you are looking for could not be found');
         }
         $indi_order = IndividualOrder::find($deli_id);
-        $indi_order->status = "isDelivered";
+        $indi_order->status = "Delivered";
 
         $indi_order->save();
 
         $current_user_id = auth()->user()->id;
         $orders_to_confirm = IndividualOrder::where('user_id', $current_user_id)->get();
+
         return redirect()->route('users.orders-dashboard')
             ->with('success', 'Order Delivered!')
             ->with('orders_to_confirm', $orders_to_confirm);;

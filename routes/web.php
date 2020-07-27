@@ -251,6 +251,10 @@ Route::get('/', 'PagesController@index');
 Route::get('/products', 'PagesController@products');
 Route::get('/homepage', 'PagesController@homepage');
 
+Route::get('/search-products', 'ExploreProductsController@search');
+
+Route::get('/search-farms', 'ExploreFarmsController@search');
+
 Route::resource('/explore-products', 'ExploreProductsController');
 Route::resource('/explore-farms', 'ExploreFarmsController');
 Route::resource('/users', 'MyAccountController');

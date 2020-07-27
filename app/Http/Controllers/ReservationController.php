@@ -10,6 +10,7 @@ use App\User;
 use App\Earning;
 use App\postsUP;
 use App\PostandFarmer;
+use App\DeliverySchedule;
 use App\userProfiles;
 use App\IndividualOrder;
 use App\Order;
@@ -177,10 +178,7 @@ class ReservationController extends Controller
         if ($this->productNoLongerAvailable()) {
             return back()->with('error', 'Sorry, One of the Crops in your Cart is no Longer Available!');
         }
-
-
-
-
+        $current_user_id = auth()->user()->id;
         $oldReservation = Session::get('reservation');
         $reservation = new Reservation($oldReservation);
         $order = new Order();
@@ -220,12 +218,19 @@ class ReservationController extends Controller
             $indi_order->endHarvestMonth = $product->endHarvestMonth;
             $indi_order->endHarvestDay = $product->endHarvestDay;
             $indi_order->endHarvestYear = $product->endHarvestYear;
-            $order->mode_of_payment = $request->input('ModeOfPayment');
-            $order->expected_amount = $request->input('ExpectedPaymentAmount');
-            $indi_order->status = "isPending";
+            $indi_order->mode_of_payment = $request->input('ModeOfPayment');
+            $indi_order->expected_amount = $request->input('ExpectedPaymentAmount');
+            $indi_order->status = "Pending";
             $indi_order->save();
 
+            // alternative ani, kay what if mag sabay? (latest)
+            $forDS = IndividualOrder::latest('created_at')->first();
 
+
+            DeliverySchedule::create([
+                'io_id' => $forDS->io_id,
+                'buyer_id' => $current_user_id
+            ]);
 
             $buyer_sms = User::where('id', $product->user_id)->get();
             $result = $buyer_sms->first();
@@ -268,7 +273,7 @@ class ReservationController extends Controller
             $product->update(['percentage_sold_before_harvest' => round((int) $product->kilogram_sold / $product->fixed_quantity * 100, 1)]);
         }
 
-        ReservationController::smsgateway($request->input('o_mobile_no'), "Hi " . $request->input('o_name') . ", thank you for your order/s! You can check your orders on -My orders- tab in the website. Thank You! [CROPLOOK SMS NOTIFICATION]");
+        ReservationController::smsgateway($request->input('mobile_no'), "Hi " . $request->input('fullName') . ", thank you for your order/s! You can check your orders on -My orders- tab in the website. Thank You! [CROPLOOK SMS NOTIFICATION]");
 
         Session::forget('reservation');
         return redirect()->route('explore-products.index')->with('success', 'Successfully Purchased Crops!');

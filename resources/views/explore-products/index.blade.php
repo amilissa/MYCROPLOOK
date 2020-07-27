@@ -1,9 +1,26 @@
 @extends('layouts.app')
 
 @section('content')
-    <h3>Explore Products
-    </h3>
+    <div class="row">
+        <div class="col-6">
+        <h3>Explore Products
+        </h3>
+        </div>
 
+        <div class="col-6">
+
+        <form action="/search-products" method="get">
+        <div class="input-group">
+                    <input type="search" class="form-control" name="search">
+
+                    <span class="input-group-prepend">
+                        <button type="submit" class="btn btn-primary">Search</button>
+                    </span>
+
+        </div>
+        </form>
+        </div>
+    </div>
 
     <div class="row">
         @if(count($posts) > 0)

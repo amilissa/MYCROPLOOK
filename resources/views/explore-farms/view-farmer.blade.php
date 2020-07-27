@@ -69,8 +69,8 @@
                             <span class="title-md">Cancellation Policy</span>
                         </div>
                         <div class="col-12 plr0 info-text text-justify">
-                            Request a cancellation within: 2 hours of purchase. <br>
-                            Strictly no cancellation permitted when harvest period begins.
+                            Request a cancellation within: Pending period of your orders. <br>
+                            Strictly no cancellation permitted when farmer confirmed your orders.
                         </div>
                     </div>
 
@@ -295,7 +295,7 @@
                                 <div class="plr15">
                                     <div class="card m15 border-none">
                                     <a href="/explore-farms/{{$allFarm->land_id}}">
-                                        <img class="card-img-top" src="/storage/uploads/userImage/no-image.jpeg" alt="Explore Image">
+                                        <img class="card-img-top" src="/storage/uploads/userImage/no-image.jpg" alt="Explore Image">
                                             <div class="card-body p0">
                                                 {{-- <ul class="info-address">
                                                     <li class="info-item">

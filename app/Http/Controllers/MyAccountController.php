@@ -11,6 +11,7 @@ use App\User;
 use App\Lands;
 use App\BillingInfo;
 use App\DeliveryInfo;
+use App\DeliverySchedule;
 use App\Reservation;
 use App\Order;
 use App\IndividualOrder;
@@ -283,12 +284,14 @@ class MyAccountController extends Controller
         });
         $current_user_id = auth()->user()->id;
         $orders_to_confirm = IndividualOrder::where('buyers_id', $current_user_id)->get();
+        $sched = DeliverySchedule::where('buyer_id', $current_user_id)->get();
 
 
         $fs_info = postsUP::groupBy('id')->get();
         $user_profile = User::where('id', $current_user_id)->get();
         return view('users.my-orders', ['orders' => $orders])
             ->with('farmers_info', $fs_info)
+            ->with('sched', $sched)
             ->with('orders_to_confirm', $orders_to_confirm);
     }
     public function getCancelledOrders($canc_id)

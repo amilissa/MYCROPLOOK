@@ -14,17 +14,12 @@
             <!-- Left Side Of Navbar -->
 
             <ul class="navbar-nav">
-                        <li class="nav-item active">
-                        <a class="nav-link" href="<?php echo $folderName ?>/homepage">Home<span class="sr-only">(current)</span></a>
-                        </li>
+
                         <li class="nav-item">
                             <a class="nav-link" href="<?php echo $folderName ?>/explore-farms">EXPLORE FARMS</a>
                           </li>
                         <li class="nav-item">
-                          <a class="nav-link" href="<?php echo $folderName ?>/explore-products">EXPLORE PRODUCTS</a>
-                        </li>
-                        <li class="nav-item">
-                          <a class="nav-link" href="<?php echo $folderName ?>/products" style="margin-right:10rem">OFFERS</a>
+                          <a class="nav-link" href="<?php echo $folderName ?>/explore-products" style="margin-right:20rem">EXPLORE PRODUCTS</a>
                         </li>
             </ul>
 

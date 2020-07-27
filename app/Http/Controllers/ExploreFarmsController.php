@@ -22,6 +22,13 @@ class ExploreFarmsController extends Controller
         return view('explore-farms.index')->with('farms', $farms);
 
     }
+
+    public function search(Request $request){
+        $search = $request->get('search');
+        $farms = Lands::where('crop_name', 'LIKE', '%'.$search.'%')->paginate(6);
+        return view('explore-farms.index')
+            ->with('farms', $farms);
+    }
     public function show($land_id)
     {
 

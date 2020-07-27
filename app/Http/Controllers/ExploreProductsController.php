@@ -187,7 +187,12 @@ class ExploreProductsController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-
+    public function search(Request $request){
+        $search = $request->get('search');
+        $posts = Post::where('crop_name', 'LIKE', '%'.$search.'%')->paginate(6);
+        return view('explore-products.index')
+            ->with('posts', $posts);
+    }
 
 
     private static function smsgateway($phone, $message)

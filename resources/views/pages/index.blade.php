@@ -184,6 +184,7 @@
 <div class="row">
        <div class="col-md-6 col-sm-6">
             <h4>Explore Products</h4>
+
         </div>
         <div class="col-md-6 col-sm-6">
             <a class="a-see-all" href="/explore-products" class="pull-right">

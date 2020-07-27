@@ -128,4 +128,8 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\OrderConfirmation');
     }
+    public function DeliverySchedule()
+    {
+        return $this->hasMany('App\DeliverySchedule');
+    }
 }
