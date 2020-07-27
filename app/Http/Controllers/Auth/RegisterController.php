@@ -98,11 +98,25 @@ class RegisterController extends Controller
             'terms' => $data['terms'],
         ]);
         BillingInfo::create([
-            'user_id' => $user->id
+            'user_id' => $user->id,
+            'bil_address' => $user->id,
+            'bil_brgy' => $user->id,
+            'bil_city' => $user->id,
+            'bil_province' => $user->id,
+            'bil_zipcode' => $user->id,
+            'bil_country' => $user->id,
+            'bil_others' => $user->id,
         ]);
 
         DeliveryInfo::create([
-            'user_id' => $user->id
+            'user_id' => $user->id,
+            'del_address' => $user->id,
+            'del_brgy' => $user->id,
+            'del_city' => $user->id,
+            'del_province' => $user->id,
+            'del_zipcode' => $user->id,
+            'del_country' => $user->id,
+            'del_others' => $user->id,
         ]);
 
         return $user;
