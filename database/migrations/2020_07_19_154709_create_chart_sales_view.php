@@ -22,8 +22,7 @@ class CreateChartSalesView extends Migration
             SUM(posts.crop_quantity::decimal) AS totalavailableqty,
             SUM(posts.kilogram_sold::decimal) AS totalkgsold,
             AVG(ROUND(posts.percentage_sold_before_harvest::decimal,
-                    1)) AS totalpercentage,
-            created_at
+                    1)) AS totalpercentage
         FROM
             posts
         GROUP BY posts.crop_name
