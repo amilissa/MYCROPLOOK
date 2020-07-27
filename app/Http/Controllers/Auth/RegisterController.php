@@ -85,14 +85,13 @@ class RegisterController extends Controller
 
         $first_name = $splitName[0];
         $last_name = !empty($splitName[1]) ? $splitName[1] : '';
-        $show_user = 0;
 
         $user = User::create([
             'register_as' => $data['register_as'],
             'first_name' => $first_name,
             'last_name' => $last_name,
             'mobile_no' => $data['mobile_no'],
-            'show_user' => $show_user,
+            'show_user' => "Approved",
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'terms' => $data['terms'],
