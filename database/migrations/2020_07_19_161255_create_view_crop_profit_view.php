@@ -34,6 +34,7 @@ class CreateViewCropProfitView extends Migration
             SUM(posts.crop_profitability::decimal) AS crop_profitability
         FROM
             posts
+
         ORDER BY posts.crop_profitability DESC
         ");
     }
