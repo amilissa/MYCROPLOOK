@@ -27,7 +27,7 @@
 						</thead>
 						<tbody>
                         @foreach ($alltrans as $alltran)
-                        @if($alltran->status == "Delivered" || $alltran->status == "isReceived")
+                        @if($alltran->status == "Delivered" || $alltran->status == "Received")
 							<tr>
 								<td>{{$alltran->io_id}}</td>
 								<td>{{$alltran->crop_name}}</td>

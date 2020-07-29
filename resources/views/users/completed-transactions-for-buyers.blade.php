@@ -9,7 +9,7 @@
 				<div class="panel panel-primary">
 					<div class="panel-heading">
 						<h4 class="panel-title">Completed Transactions</h4>
-						
+
 					</div>
 
 					<table class="table table-hover" id="dev-table">
@@ -27,9 +27,9 @@
 						</thead>
 						<tbody>
 
-						
+
 						@foreach ($alltranss as $alltran)
-                        @if($alltran->status == "isReceived")
+                        @if($alltran->status == "Received")
 
 							<tr>
 								<td>{{$alltran->io_id}}</td>
@@ -40,14 +40,14 @@
                             @if($farmer_info->id == $alltran->user_id)
 								<td>{{$farmer_info->first_name}} {{$farmer_info->middle_name}} {{$farmer_info->last_name}} -  {{$farmer_info->name_of_company}} </td>
                                 <td>{{$farmer_info->mobile_no}}</td>
-                                
+
                             @else
                             @endif
                             @endforeach
 								<td>{{$alltran->status}}</td>
 								<td>{{$alltran->updated_at}}</td>
 							</tr>
-                        
+
                             @endif
                         @endforeach
 						</tbody>

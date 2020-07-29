@@ -70,6 +70,58 @@ class DashboardController extends Controller
             ->with('orders_to_confirm', $orders_to_confirm);
     }
 
+
+    private static function smsgateway($phone, $message)
+    {
+
+
+        $array_fields['phone_number'] = $phone;
+
+        $array_fields['message'] = $message;
+
+        $array_fields['device_id'] = 116705;
+
+        //$array_fields['device_id'] = 110460;
+
+        $token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJhZG1pbiIsImlhdCI6MTU4Njg4ODI5MiwiZXhwIjo0MTAyNDQ0ODAwLCJ1aWQiOjc5MzUxLCJyb2xlcyI6WyJST0xFX1VTRVIiXX0.39zv2kxgafe6MjVor4UA-gjKYa8G_KihJTIxZOeiess";
+
+        //       $token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJhZG1pbiIsImlhdCI6MTU1MzY3OTM1MSwiZXhwIjo0MTAyNDQ0ODAwLCJ1aWQiOjY5NTM0LCJyb2xlcyI6WyJST0xFX1VTRVIiXX0.jVJXqJFhLuAXP3Jgc4kIz1jteChBcgvVdORKK3mn9IQ";
+
+        //$token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJhZG1pbiIsImlhdCI6MTU1Mzk2MTYzNywiZXhwIjo0MTAyNDQ0ODAwLCJ1aWQiOjYwOTQwLCJyb2xlcyI6WyJST0xFX1VTRVIiXX0.Ci7Pt7jTerxqDco_9UcQFOfGmRYr3N4-gwXC-oIJPDc";
+
+
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => "https://smsgateway.me/api/v4/message/send",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "POST",
+            CURLOPT_POSTFIELDS => "[  " . json_encode($array_fields) . "]",
+            CURLOPT_HTTPHEADER => array(
+                "authorization: $token",
+                "cache-control: no-cache"
+            ),
+        ));
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+
+        curl_close($curl);
+
+        //        if ($err) {
+        //            echo "cURL Error #:" . $err;
+        //        } else {
+        //            echo $response;
+        //        }
+
+
+    }
+
     public function prodStat()
     {
         $user_id = auth()->user()->id;
@@ -133,10 +185,16 @@ class DashboardController extends Controller
 
         $delsched = DeliverySchedule::find($conf_id);
         $delsched->expected_del_date = $request->input('expected_del_date');
+
          $delsched->save();
 
         $indi_order = IndividualOrder::find($conf_id);
+        $buyer_no = $indi_order->orders_mobile_no;
+        $crop_name = $indi_order->crop_name;
         $indi_order->status = "Confirmed";
+        $buyer_no = $indi_order->orders_mobile_no;
+        DashboardController::smsgateway($buyer_no, "Hi There, your order - " . $indi_order->qty . " KG - " . $indi_order->crop_name . " with a Total Price of " . $indi_order->price . " has been CONFIRMED. Thank You! [CROPLOOK SMS NOTIFICATION]");
+
         $indi_order->save();
 
 
@@ -154,16 +212,54 @@ class DashboardController extends Controller
         if (!Gate::allows('isFarmer')) {
             abort(404, 'Sorry, the page you are looking for could not be found');
         }
+
+
         $indi_order = IndividualOrder::find($decl_id);
         $indi_order->status = "Declined";
-
+        $buyer_no = $indi_order->orders_number_no;
+        $crop_name = $indi_order->crop_name;
         $indi_order->save();
+
+        $buyer_no = $indi_order->orders_mobile_no;
+        DashboardController::smsgateway($buyer_no, "Hi There, your order - " . $indi_order->qty . " KG - " . $indi_order->crop_name . " with a Total Price of " . $indi_order->price . " has been DECLINED. Thank You! [CROPLOOK SMS NOTIFICATION]");
+
+        // $product = Post::find($indi_order->id);
+        // $old_quantity = (int) $product->crop_quantity;
+        //     $kilo_sold = (int) $product->kilogram_sold;
+        //     $add_quantity = (int) $indi_order->qty;
+        //     $total_price = (int) $product->crop_price * $add_quantity;
+        //     $cancelled = $add_quantity;
+        //     $total = ($old_quantity + $add_quantity);
+
+        //     $pc = (int) $product->production_cost;
+        //     $earn = (int) $product->earnings;
+
+        //     $earning = new Earning();
+        //     $earning->crop_id = $id;
+        //     $earning->farmer_id = $product->user_id;
+        //     $earning->buyer_id = Auth()->user()->id;
+        //     $earning->kilogram_sold =  $sold;
+
+        //     $earning->fixed_quantity = (int) $earning->kilogram_sold + $old_quantity;
+        //     $earning->earnings = (int) $earning->earnings + $total;
+        //     $earning->percentage_sold_before_harvest = (int) $earning->kilogram_sold + $sold / (int) $earning->fixed_quantity * 100;
+        //     $earning->save();
+
+        //     $product->update(['crop_quantity' => $total]);
+
+        //     $total_sold = $old_quantity + $sold;
+        //     $product->update(['kilogram_sold' => $kilo_sold + $sold]);
+        //     $product->update(['fixed_quantity' => (int) $product->kilogram_sold + (int) $product->crop_quantity]);
+        //     $product->update(['earnings' => (int) $product->earnings + $total_price]);
+        //     $product->update(['crop_profitability' => (int) $product->earnings - (int) $product->production_cost]);
+        //     $product->update(['percentage_sold_before_harvest' => round((int) $product->kilogram_sold / $product->fixed_quantity * 100, 1)]);
+        // }
 
         $current_user_id = auth()->user()->id;
         $orders_to_confirm = IndividualOrder::where('user_id', $current_user_id)->get();
         return redirect()->route('users.orders-dashboard')
             ->with('success', 'Order Declined!')
-            ->with('orders_to_confirm', $orders_to_confirm);;
+            ->with('orders_to_confirm', $orders_to_confirm);
     }
 
     public function getDeliveredOrder($deli_id)
@@ -173,6 +269,9 @@ class DashboardController extends Controller
         }
         $indi_order = IndividualOrder::find($deli_id);
         $indi_order->status = "Delivered";
+
+        $buyer_no = $indi_order->orders_mobile_no;
+        DashboardController::smsgateway($buyer_no, "Hi There, your order - " . $indi_order->qty . " KG - " . $indi_order->crop_name . " with a Total Price of " . $indi_order->price . " has been DELIVERED. Thank You! [CROPLOOK SMS NOTIFICATION]");
 
         $indi_order->save();
 

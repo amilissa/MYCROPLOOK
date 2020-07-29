@@ -15,7 +15,7 @@ class CreateViewPostView extends Migration
     {
         \DB::statement("
         CREATE VIEW view_post AS
-    SELECT 
+    SELECT
         posts.id AS posts_id,
         posts.crop_name AS crop_name,
         posts.crop_image AS crop_image,
@@ -24,8 +24,8 @@ class CreateViewPostView extends Migration
         users.id AS id,
         posts.crop_status AS crop_status
     FROM
-        (posts
-        JOIN users ON ((posts.user_id = users.id)))
+        posts
+        JOIN users ON posts.user_id::integer = users.id::integer
         ");
     }
 

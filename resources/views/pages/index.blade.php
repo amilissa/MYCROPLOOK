@@ -169,11 +169,21 @@
 
 <hr>
 <div class="row">
-       <div class="flex col-md-6">
+<div class="col-6">
+        <h4>Crop Availability Statistics</h4>
+</div>
+<div class="col-6">
+    <h4>Crop Sales Statistics</h4>
+</div>
+</div>
+<div class="row">
+       <div class="flex col-6">
              {!! $chart->container() !!}
-        </div>
 
-    <div class="flex col-md-6">
+            </div>
+
+    <div class="flex col-6">
+
         {!! $salesChart->container() !!}
     </div>
 

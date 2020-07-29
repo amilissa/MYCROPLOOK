@@ -8,10 +8,15 @@
                 :class="{ selected: contact == selected }"
             >
                 <div class="avatar">
-                    <img v-bind:src="" :alt="contact.name" />
+                    <img
+                        v-bind:src="contact.profile_image"
+                        :alt="contact.name"
+                    />
                 </div>
                 <div class="contact">
-                    <p class="name">{{ contact.name }}</p>
+                    <p class="name">
+                        {{ contact.first_name }} {{ contact.last_name }}
+                    </p>
                     <p class="email">{{ contact.email }}</p>
                 </div>
                 <span class="unread" v-if="contact.unread">

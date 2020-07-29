@@ -159,6 +159,7 @@ Route::get(
     ]
 );
 
+//for images controller
 
 // click sa Completed Transaction of Buyers
 Route::get('/users/completed-transactions-for-buyers/', ['uses' => 'MyAccountController@getCompletedTransactionsOfBuyer', 'as' => 'myaccount.CompletedTransactionsOfBuyer']);

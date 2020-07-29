@@ -15,7 +15,7 @@ class CreateViewCropProfitView extends Migration
     {
         \DB::statement("
         CREATE VIEW view_crop_profit AS
-        SELECT 
+        SELECT
             posts.id AS id,
             posts.crop_name AS crop_name,
             posts.crop_price AS crop_price,
@@ -26,14 +26,15 @@ class CreateViewCropProfitView extends Migration
             posts.updated_at AS updated_at,
             posts.user_id AS user_id,
             posts.crop_image AS crop_image,
-            posts.kilogram_sold AS kilogram_sold,
-            posts.fixed_quantity AS fixed_quantity,
-            posts.earnings AS earnings,
-            posts.percentage_sold_before_harvest AS percentage_sold_before_harvest,
-            posts.production_cost AS production_cost,
-            posts.crop_profitability AS crop_profitability
+            SUM(posts.kilogram_sold::decimal) AS kilogram_sold,
+            SUM(posts.fixed_quantity::decimal) AS fixed_quantity,
+            SUM(posts.earnings::decimal) AS earnings,
+            SUM(posts.percentage_sold_before_harvest::decimal) AS percentage_sold_before_harvest,
+            SUM(posts.production_cost::decimal) AS production_cost,
+            SUM(posts.crop_profitability::decimal) AS crop_profitability
         FROM
             posts
+        GROUP BY posts.crop_name
         ORDER BY posts.crop_profitability DESC
         ");
     }

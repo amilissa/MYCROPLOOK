@@ -300,7 +300,7 @@ class MyAccountController extends Controller
             abort(404, 'Sorry, the page you are looking for could not be found');
         }
         $indi_order = IndividualOrder::find($canc_id);
-        $indi_order->status = "isCancelled";
+        $indi_order->status = "Cancelled";
 
         $indi_order->save();
 
@@ -316,7 +316,7 @@ class MyAccountController extends Controller
             abort(404, 'Sorry, the page you are looking for could not be found');
         }
         $indi_order = IndividualOrder::find($rece_id);
-        $indi_order->status = "isReceived";
+        $indi_order->status = "Received";
 
         $indi_order->save();
 
