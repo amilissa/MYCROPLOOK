@@ -18,7 +18,7 @@ class CreateViewBuyersCropView extends Migration
     SELECT
     earnings.farmer_id as user_id,
     earnings.crop_id,
-    COUNT( DISTINCT earnings.buyer_id) AS buyers_per_crop
+    COUNT( DISTINCT earnings.buyer_id::integer) AS buyers_per_crop
     FROM earnings
     GROUP BY earnings.crop_id, earnings.farmer_id
     ");
