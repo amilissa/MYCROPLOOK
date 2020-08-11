@@ -29,7 +29,12 @@ class MyAccountController extends Controller
     {
         $current_user_id = auth()->user()->id;
         $user_profile = User::where('id', $current_user_id)->get();
-        return view('users.user-profile')->with('user_profile', $user_profile);
+        $delivery_info = DeliveryInfo::where('user_id', $current_user_id)->get();
+        $user_lands = Lands::where('user_id', $current_user_id)->get();
+        return view('users.user-profile')
+        ->with('user_profile', $user_profile)
+        ->with('delivery_info', $delivery_info)
+        ->with('user_lands', $user_lands);
     }
 
 

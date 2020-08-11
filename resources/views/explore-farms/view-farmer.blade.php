@@ -237,7 +237,6 @@
                             <div class="card m15 border-none">
                                     <img class="card-img-top" src="/storage/uploads/cropImage/{{$farmproduct->crop_image}}" alt="Explore Image">
                                     <div class="card-img-overlay overlay d-flex flex-column p0 tag-img">
-                                        <p class="card-tag-solid text-lato-bold">In Season</p>
                                     </div>
                                     <div class="card-body p0">
                                         {{-- <ul class="info-address">
@@ -250,7 +249,10 @@
                                         </ul> --}}
                                         <h6 class="info-title">{{$farmproduct->crop_name}}</h6>
                                         <span class="product-price text-sub"> {{$farmproduct->crop_price}} </span> / kg <br>
-                                        <span class="product-harvest-pending">Harvesting in {{$farmproduct->startHarvestMonth}} {{$farmproduct->startHarvestYear}} - {{$farmproduct->endHarvestMonth}} {{$farmproduct->endHarvestYear}}</span>
+                                        @if($dt->year == $farmproduct->startHarvestYear)
+                                        <span class="product-harvest-pending">Harvesting {{$dt->addMonths((int) $farmproduct->startHarvestMonth - (int) $dt->month)->diffForHumans()}}</span>
+                                        @else
+                                        @endif
                                         <div class="form-row mt10">
                                             <div class="col-12">
                                                 <div class="row">
@@ -295,7 +297,7 @@
                                 <div class="plr15">
                                     <div class="card m15 border-none">
                                     <a href="/explore-farms/{{$allFarm->land_id}}">
-                                        <img class="card-img-top" src="/storage/uploads/userImage/no-image.jpg" alt="Explore Image">
+                                    <img class="card-img-top" src="/storage/uploads/landImage/{{$allFarm->land_image}}" alt="Explore Image">
                                             <div class="card-body p0">
                                                 {{-- <ul class="info-address">
                                                     <li class="info-item">

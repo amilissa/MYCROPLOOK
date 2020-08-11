@@ -19,4 +19,9 @@ class Post extends Model
 public function user(){
     return $this->belongsTo('App\User');
 }
+
+protected $casts = [
+    'created_at' => 'datetime:Y-m-d',
+    'updated_at' => 'datetime:Y-m-d',
+];
 }

@@ -65,7 +65,7 @@ class MyLandsController extends Controller
 
             $user_lands->save();
 
-            return redirect('explore-products')->with('success', 'Land Added!');
+            return redirect('users')->with('success', 'Land Added!');
         }
     }
 }

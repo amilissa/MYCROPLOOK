@@ -17,6 +17,7 @@ Route::get('/users/profile-info', ['uses' => 'MyAccountController@getProfileInfo
 Route::get('/users/delivery-info', ['uses' => 'MyAccountController@getDeliveryAddress', 'as' => 'buyers.delivery-add']);
 Route::get('/users/billing-info', ['uses' => 'MyAccountController@getBillingAddress', 'as' => 'buyers.billing-add']);
 Route::get('/users/order-history', ['uses' => 'MyAccountController@getOrderHistory', 'as' => 'buyers.order-history']);
+Route::get('/users/add-lands', ['uses' => 'MyLandsController@addlands', 'as' => 'farmers.lands']);
 
 
 Route::post('users/{bil_id}/billing-info', 'MyAccountController@updateBillingInfo')->name('users.billing-info');
@@ -158,7 +159,6 @@ Route::get(
         'as' => 'myaccount.ReceivedOrder'
     ]
 );
-
 //for images controller
 
 // click sa Completed Transaction of Buyers
@@ -189,7 +189,7 @@ Route::get('/users/edit-profile', ['uses' => 'MyAccountController@editprofile', 
 Route::get('/users/user-lands', ['uses' => 'MyLandsController@userlands', 'as' => 'users.userlands']);
 
 // add new button user lands
-Route::get('/users/add-lands/', ['uses' => 'MyLandsController@addlands', 'as' => 'users.addlands']);
+//Route::get('/users/add-lands/', ['uses' => 'MyLandsController@addlands', 'as' => 'users.addlands']);
 // inside add-lands
 Route::post('/users/user-lands/', ['uses' => 'MyLandsController@storelands']);
 // view farmer

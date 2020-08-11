@@ -35,11 +35,12 @@ class ExploreProductsController extends Controller
         //$posts = DB::select('SELECT * FROM posts');
         //$posts = Post::orderBy('crop_name','desc')->take(1)->get();
         $posts = Post::orderBy('crop_name', 'desc')->paginate(6);
-
+        $dt = Carbon::now();
         // <h4>Harvest Period: December - {{$post->startHarvestYear}}</h4>
         //$posts = Post::orderBy('created_at','desc')->get();
         return view('explore-products.index')
-            ->with('posts', $posts);
+            ->with('posts', $posts)
+            ->with('dt', $dt);
     }
 
 

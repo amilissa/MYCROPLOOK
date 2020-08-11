@@ -13,7 +13,13 @@
         <ul>
 
           <li><a class="btn btn-info btn-block" href="{{route('buyers.prof-info')}}" class="">Profile Information</a> </li>
+          @can('isBuyer')
           <li><a class="btn btn-info btn-block" href="{{route('buyers.delivery-add')}}" class="">Delivery Address</a> </li>
+            @endcan
+          @can('isFarmer')
+
+          <li><a class="btn btn-info btn-block" href="{{route('farmers.lands')}}" class="">My Lands</a> </li>
+          @endcan
           {{-- <li><a class="btn btn-info btn-block" href="{{route('buyers.billing-add')}}" class="">Billing Address</a></li> --}}
           <li><a class="btn btn-info btn-block" href="{{route('buyers.order-history')}}" class="">Order History</a> </li>
           {{-- <li><a href="{{route('users.prod-stat')}}" class="">Change Password</a></li> --}}
@@ -26,74 +32,141 @@
     <div class="col-main">
 
 
-      <div class="my-account">
+        <div class="my-account">
+            @foreach ($user_profile as $current_user)
 
-        {{-- <form id="frmRegister" action="https://www.palengkeboy.com/do-update-customer-profile" method="post" enctype="multipart/form-data" class="form-horizontal">
+                  <div class="col-sm-12">
+                    <h2>Your Personal Details</h2>
+                    <br>
 
-            <input type="hidden" id="_token" name="_token" value="vHbYmvYOheZchP9HpqvAhVoJy0nS3qdC3BO4jmmJ">
+                  </div>
 
-            <fieldset id="account">
-              <div class="col-sm-12">
-                <h2>Your Personal Details</h2>
+                  <small style="color: red">* click side tabs to update your information.</small>
+                 <div class="row" style="padding:10px;">
+
+                    <div class="col-md-4" style="font-weight:normal;">
+                      <label class="col-md-12" style="font-weight: normal;"> First Name: <b>{{$current_user->first_name}}</b></label>
+
+                    </div>
+                    <div class="col-md-4" style="font-weight:normal;">
+                    <label class="col-md-12" style="font-weight: normal;"> Last Name: <b>{{$current_user->last_name}}</b></label>
+
+                    </div>
+                    <div class="col-md-4" style="font-weight:normal;">
+                    <label class="col-md-12" style="font-weight: normal;">Middle Name: <b>{{$current_user->middle_name}}</b></label>
+
+                    </div>
+                  </div>
+
+                  <div class="row" style="padding:10px;">
+                    <div class="col-md-4" style="font-weight:normal;">
+                      <label class="col-md-12" style="font-weight: normal;"> Mobile No.: <b>{{$current_user->mobile_no}}</b></label>
+                    </div>
+                    <div class="col-md-4" style="font-weight:normal;">
+                      <label class="col-md-12" style="font-weight: normal;"> E-Mail Address: <b>{{$current_user->email}}</b></label>
+
+                    </div>
+
+                  </div>
+
                 <br>
-              </div>
 
-              <div class="row" style="padding:10px;">
-                <div class="col-md-4" style="font-weight:normal;">
-                  <label class="col-md-12" style="font-weight: normal;"><span style="color:red;">*</span> First Name</label>
-                  <div class="col-md-12">
-                    <input type="text" name="FirstName" value="Mark" placeholder="First Name" id="input-firstname" class="form-control" required="">
-                  </div>
-                </div>
-                <div class="col-md-4" style="font-weight:normal;">
-                  <label class="col-md-12" style="font-weight: normal;"><span style="color:red;">*</span> Last Name</label>
-                  <div class="col-md-12">
-                    <input type="text" name="LastName" value="Anthony" placeholder="Last Name" id="input-lastname" class="form-control" required="">
-                  </div>
-                </div>
-                <div class="col-md-4" style="font-weight:normal;">
-                  <label class="col-md-12" style="font-weight: normal;">Middle Name</label>
-                  <div class="col-md-12">
-                    <input type="text" name="MiddleName" value="" placeholder="Middle Name" id="input-middlename" class="form-control">
-                  </div>
-                </div>
-              </div>
+                  @can('isBuyer')
+                      <div class="col-sm-12">
+                        <h2>Delivery Address Information</h2>
+                        <br>
+                      </div>
 
-              <div class="row" style="padding:10px;">
-                <div class="col-md-4" style="font-weight:normal;">
-                  <label class="col-md-12" style="font-weight: normal;"><span style="color:red;">*</span> Mobile No.</label>
-                  <div class="col-md-12">
-                    <input type="text" name="MobileNo" value="09093522667" placeholder="Mobile No." id="input-mobileno" class="form-control" required="">
-                  </div>
-                </div>
-                <div class="col-md-4" style="font-weight:normal;">
-                  <label class="col-md-12" style="font-weight: normal;">Tel. No.</label>
-                  <div class="col-md-12">
-                    <input type="tel" name="TelNo" value="n/a" placeholder="Telephone No." id="input-telephone" class="form-control" required="">
-                  </div>
-                </div>
-                <div class="col-md-4" style="font-weight:normal;">
-                  <label class="col-md-12" style="font-weight: normal;"><span style="color:red;">*</span> E-Mail Address</label>
-                  <div class="col-md-12">
-                    <input type="email" name="EmailAddress" value="marklibres345@gmail.com" placeholder="E-Mail Address" id="input-emailaddress" class="form-control" required="">
-                  </div>
-                </div>
+                      <small style="color: red">* click side tabs to update your information.</small>
+                      @foreach($delivery_info as $del)
+                      <div class="row" style="padding:10px;">
+                        <div class="col-md-6" style="font-weight:normal;">
+                        <label class="col-md-12" style="font-weight: normal;">Address: <b>{{$del->del_address}}</b></label>
 
-              </div>
+                        </div>
 
-            </fieldset>
-            <br>
-            <fieldset>
-              <div class="form-group col-sm-12">
-                  <div class="pull-right">
-                    <button type="submit" id="btnContinue" class="button continue" style="background-color: #1c9025; color:#fff;">Update</button>
+                        <div class="col-md-6" style="font-weight:normal;">
+                        <label class="col-md-12" style="font-weight: normal;">Barangay: <b>{{$del->del_brgy,}}</b></label>
+
+                        </div>
+                      </div>
+
+                      <div class="row" style="padding:10px;">
+                        <div class="col-md-6" style="font-weight:normal;">
+                          <label class="col-md-12" style="font-weight: normal;">City: <b>{{$del->del_city}}</b></label>
+
+                        </div>
+                        <div class="col-md-6" style="font-weight:normal;">
+                          <label class="col-md-12" style="font-weight: normal;">State/Province: <b>{{$del->del_province}}</b></label>
+
+                        </div>
+                      </div>
+
+                      <div class="row" style="padding:10px;">
+                        <div class="col-md-4" style="font-weight:normal;">
+                          <label class="col-md-12" style="font-weight: normal;">Zip Code: <b>{{$del->del_zipcode}}</b></label>
+
+                        </div>
+                        <div class="col-md-8" style="font-weight:normal;">
+                          <label class="col-md-12" style="font-weight: normal;">Country: <b>{{$del->del_country}}</b></label>
+
+                        </div>
+                      </div>
+                      <div class="row" style="padding:10px;">
+                        <div class="col-md-12" style="font-weight:normal;">
+                          <label class="col-md-12" style="font-weight: normal;">Other Billing Address Details: <b>{{$del->del_others}}</b></label>
+                        </div>
+                      </div>
+                    @endforeach
+                    <br>
+
+                @endcan
+
+
+
+                @can('isFarmer')
+                <div class="col-sm-12">
+                    <h2>My Lands</h2>
+                    <br>
+
                   </div>
-              </div>
-            </fieldset>
 
-        </form> --}}
+                  <small style="color: red">* click side tabs to update your information.</small>
+                @foreach($user_lands as $lands)
+                 <div class="row" style="padding:10px;">
 
-      </div>
+                    <div class="col-md-4" style="font-weight:normal;">
+                      <label class="col-md-12" style="font-weight: normal;"> Name of Land/Company: <b>{{$lands->name_of_company}}</b></label>
+
+                    </div>
+                    <div class="col-md-4" style="font-weight:normal;">
+                    <label class="col-md-12" style="font-weight: normal;"> Land Address: <b>{{$lands->land_address}}</b></label>
+
+                    </div>
+                  </div>
+
+                  <div class="row" style="padding:10px;">
+                    <div class="col-md-4" style="font-weight:normal;">
+                      <label class="col-md-12" style="font-weight: normal;"> Land Elevation: <b>{{$lands->land_elevation}}</b></label>
+                    </div>
+                    <div class="col-md-4" style="font-weight:normal;">
+
+                    <label class="col-md-12" style="font-weight: normal;">Land Area: <b>{{$lands->land_area}}</b></label>
+
+                    </div>
+
+                  </div>
+                  @endforeach
+
+                <br>
+                @endcan
+
+
+
+
+
+                @endforeach
+          </div>
     </div>
   </div>
     </div>

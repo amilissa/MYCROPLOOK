@@ -32,6 +32,13 @@
                                 Harvest Period: {{$post->startHarvestMonth}} {{$post->startHarvestDay}} {{$post->startHarvestYear}} -
                                                 {{$post->endHarvestMonth}} {{$post->endHarvestDay}} {{$post->endHarvestYear}}
                             </p>
+                            <p>
+                                @if($dt->year == $post->startHarvestYear)
+                                <h6>{{$dt->addMonths((int) $post->startHarvestMonth - (int) $dt->month)->diffForHumans()}}</h6>
+                                @else
+                                @endif
+                            </p>
+
                             <style type="text/css">
                                 .progress{
                                     height: 10px;
@@ -49,7 +56,7 @@
 
                                 </div>
                             </div>
-                            <small>{{$post->percentage_sold_before_harvest}}% sold before harvest</small>
+                            <small>{{$post->percentage_sold_before_harvest}}% sold</small>
                             <div class="form-row mt20">
                                 <div class="col-3 text-center">
                                 <p class="card-text mb0">

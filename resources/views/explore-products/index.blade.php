@@ -25,6 +25,7 @@
     <div class="row">
         @if(count($posts) > 0)
         @foreach($posts as $post)
+
         <div class="col-sm-6 col-md-4 border-dark">
           <div class="thumbnail" style="margin:10px" >
             <img style="height: 200px; width: 100%" class="img-responsive" src="/storage/uploads/cropImage/{{$post->crop_image}}">
@@ -34,7 +35,10 @@
                 <h6> Posted on {{$post->created_at}} <br> Farmer: {{$post->user->name}}</h6>
 
                 <h6>Harvest Period: {{$post->startHarvestMonth}} {{$post->startHarvestYear}} - {{$post->endHarvestMonth}} {{$post->endHarvestYear}} </h6>
-
+                @if($dt->year == $post->startHarvestYear)
+                <h6>{{$dt->addMonths((int) $post->startHarvestMonth - (int) $dt->month)->diffForHumans()}}</h6>
+                @else
+                @endif
                 <style type="text/css">
                     .progress{
                         height: 10px;
@@ -54,10 +58,9 @@
 
                 @if(!empty($post->percentage_sold_before_harvest))
 
-                    <small>{{$post->percentage_sold_before_harvest}}% sold before harvest</small>
+                    <small>{{$post->percentage_sold_before_harvest}}% sold</small>
                 @else
-
-                <small>0% sold before harvest</small>
+                <small>0% sold </small>
                 @endif
                 <hr>
                 @if($post->crop_quantity >110)

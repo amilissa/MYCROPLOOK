@@ -417,7 +417,7 @@
                     <br>
                     * Check the items upon receive and report to us immediately any lacking or damages within 24 hrs.
                     <br>
-                    * Order cancellation is not allowed once the order has been dispatched for delivery.
+                    * Order cancellation is not allowed once the order has been confirmed by the farmer.
                     <br>
                   </p>
                 </div>

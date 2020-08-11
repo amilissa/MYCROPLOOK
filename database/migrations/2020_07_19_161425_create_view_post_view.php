@@ -22,10 +22,12 @@ class CreateViewPostView extends Migration
         posts.crop_price AS crop_price,
         posts.crop_quantity AS crop_quantity,
         users.id AS id,
-        posts.crop_status AS crop_status
+        posts.crop_status AS crop_status,
+        posts.startHarvestMonth,
+        posts.startHarvestYear
     FROM
-        posts
-        JOIN users ON posts.user_id::integer = users.id::integer
+        (posts
+        JOIN users ON ((posts.user_id = users.id)))
         ");
     }
 

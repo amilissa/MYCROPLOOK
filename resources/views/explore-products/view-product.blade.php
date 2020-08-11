@@ -107,10 +107,10 @@
                                             </div>
                                             @if(!empty($post->percentage_sold_before_harvest))
 
-                                                <small>{{$post->percentage_sold_before_harvest}}% sold before harvest</small>
+                                                <small>{{$post->percentage_sold_before_harvest}}% sold </small>
                                             @else
 
-                                            <small>0% sold before harvest</small>
+                                            <small>0% sold</small>
                                             @endif
                                         </div>
 
@@ -185,8 +185,8 @@
                 <div class="col-12 mt20 p20">
                     <h5>Cancellation Policy</h5>
                     <p class="text-justify mtb0">
-                        Request a cancellation within: 2 hours of purchase.<br>
-                        Strictly no cancellation permitted when harvest period begins.
+                        Request a cancellation within: Pending period of your orders. <br>
+                        Strictly no cancellation permitted when farmer confirmed your orders.
                     </p>
                 </div>
 

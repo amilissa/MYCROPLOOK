@@ -9,6 +9,7 @@ use App\Post;
 use App\farmProfile;
 use App\PostandFarmer;
 use App\farmProducts;
+use Carbon\Carbon;
 use Session;
 use DB;
 
@@ -37,9 +38,11 @@ class ExploreFarmsController extends Controller
         $product_user_id = $farm->user_id;
 
         $farm_products = farmProducts::where('id', $product_user_id)->paginate(8);
+        $dt = Carbon::now();
         return view('explore-farms.view-farmer')
         ->with('farm', $farm)
         ->with('allFarms', $allFarms)
+        ->with('dt', $dt)
         ->with('farm_products', $farm_products);
 
     }

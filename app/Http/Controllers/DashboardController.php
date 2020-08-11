@@ -132,7 +132,7 @@ class DashboardController extends Controller
 
         //Crop Availability
         $totalQty = farmerTotalQty::where('user_id', $user_id)
-            ->pluck('sumcropqty', 'crop_name');
+            ->pluck('sumcropqty', 'created_at');
 
         //Crop Sales Kilogram
         $salesKg = farmerChart::where('user_id', $user_id)
@@ -155,11 +155,11 @@ class DashboardController extends Controller
         $chart->dataset('Crop Availability', 'bar', $totalQty->values())
             ->backgroundColor('green');
         // $chart->dataset('Crops Average Price', 'line', $totalPrice->values())
-        // ->backgroundColor('grey');
-        $chart->dataset('Crops Fixed Quantity', 'bubble', $salesFixedQuantity->values())
-            ->backgroundColor('red');
+        // // ->backgroundColor('grey');
+        // $chart->dataset('Crops Fixed Quantity', 'bubble', $salesFixedQuantity->values())
+
         $chart->dataset('Crop Sales Kilogram', 'line', $salesKg->values())
-            ->backgroundColor('grey');
+        ->backgroundColor('red');
 
 
         return view('users/prod-statistics')

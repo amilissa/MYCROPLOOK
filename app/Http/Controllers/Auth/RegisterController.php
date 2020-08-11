@@ -97,16 +97,16 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
             'terms' => $data['terms'],
         ]);
-        BillingInfo::create([
-            'user_id' => $user->id,
-            'bil_address' => $user->id,
-            'bil_brgy' => $user->id,
-            'bil_city' => $user->id,
-            'bil_province' => $user->id,
-            'bil_zipcode' => $user->id,
-            'bil_country' => $user->id,
-            'bil_others' => $user->id,
-        ]);
+        // BillingInfo::create([
+        //     'user_id' => $user->id,
+        //     'bil_address' => $user->id,
+        //     'bil_brgy' => $user->id,
+        //     'bil_city' => $user->id,
+        //     'bil_province' => $user->id,
+        //     'bil_zipcode' => $user->id,
+        //     'bil_country' => $user->id,
+        //     'bil_others' => $user->id,
+        // ]);
 
         DeliveryInfo::create([
             'user_id' => $user->id,
