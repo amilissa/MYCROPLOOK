@@ -19,7 +19,7 @@ class CreateFarmerTotalqtyandcroppriceView extends Migration
                 posts.user_id AS user_id,
                 SUM(posts.crop_quantity) AS sumcropqty,
                 AVG(posts.crop_price) AS avgcropprice,
-                posts.crop_name AS crop_name
+                posts.crop_name AS crop_name,
                 posts.created_at
             FROM
                 posts
