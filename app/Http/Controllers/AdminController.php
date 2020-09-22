@@ -72,7 +72,8 @@ public function create()
             $extension= $request->file('default_cropImage')->getClientOriginalExtension();
             $filenameToStore = $filename.'_'.time().'.'.$extension;
             // upload image
-            $path = $request->file('default_cropImage')->storeAs('public/uploads/croplists/', $filenameToStore);
+            $pathToFile = Storage::disk('public')->put('uploads/croplists/', $filenameToStore);
+            //$path = $request->file('default_cropImage')->storeAs('public/uploads/croplists/', $filenameToStore);
 
         } else{
         }
