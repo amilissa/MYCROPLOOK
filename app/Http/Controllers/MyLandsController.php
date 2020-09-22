@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\userProfile;
 use App\Post;
+use Storage;
 use App\User;
 use App\Lands;
 

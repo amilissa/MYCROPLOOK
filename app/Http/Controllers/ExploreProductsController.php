@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Post;
 use App\Charts\productsChart;
 use App\Reservation;
+use Storage;
 use App\postsUP;
 use App\farmProducts;
 use App\Order;
