@@ -14,6 +14,7 @@ use App\Order;
 use App\IndividualOrder;
 use App\DeliverySchedule;
 use DB;
+use Carbon\Carbon;
 use Charts;
 use Gate;
 
@@ -51,7 +52,10 @@ class DashboardController extends Controller
         //     }
         // }
 
+        $dt = Carbon::now();
         return view('dashboard')
+        
+        ->with('dt', $dt)
             ->with('buyers', $user->BuyersofCrop)
             ->with('posts', $user->posts);
     }
