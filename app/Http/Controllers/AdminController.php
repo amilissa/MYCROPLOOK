@@ -75,6 +75,7 @@ public function create()
             // upload image
             
             $pathToFile = Storage::disk('public')->put('public/uploads/croplists/', $filenameToStore);
+            info($pathToFile);
 
             //$path = $request->file('default_cropImage')->storeAs('public/uploads/croplists/', $filenameToStore);
 
