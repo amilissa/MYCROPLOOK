@@ -50,9 +50,9 @@ class MyLandsController extends Controller
                 $filenameToStore = $filename . '_' . time() . '.' . $extension;
                 // upload image
                 
-                //$pathToFile = Storage::disk('public')->put('uploads/landImage/', $filenameToStore);
+                $pathToFile = Storage::disk('public')->put('public/uploads/landImage/', $filenameToStore);
             
-                $path = $request->file('landImage')->storeAs('public/uploads/landImage/', $filenameToStore);
+                //$path = $request->file('landImage')->storeAs('public/uploads/landImage/', $filenameToStore);
             } else {
                 $filenameToStore = 'no-image.jpg';
             }

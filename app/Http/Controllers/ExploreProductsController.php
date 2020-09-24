@@ -104,8 +104,8 @@ class ExploreProductsController extends Controller
             $filenameToStore = $filename . '_' . time() . '.' . $extension;
             // upload image
             
-            //$pathToFile = Storage::disk('public')->put('uploads/cropImage/', $filenameToStore);
-            $path = $request->file('cropImage')->storeAs('public/uploads/cropImage/', $filenameToStore);
+            $pathToFile = Storage::disk('public')->put('public/uploads/cropImage/', $filenameToStore);
+            //$path = $request->file('cropImage')->storeAs('public/uploads/cropImage/', $filenameToStore);
         } else {
             $filenameToStore = 'no-image.jpg';
         }
@@ -263,9 +263,9 @@ class ExploreProductsController extends Controller
             $extension = $request->file('cropImage')->getClientOriginalExtension();
             $filenameToStore = $filename . '_' . time() . '.' . $extension;
             // upload image
-            //$pathToFile = Storage::disk('public')->put('uploads/cropImage/', $filenameToStore);
+            $pathToFile = Storage::disk('public')->put('public/uploads/cropImage/', $filenameToStore);
 
-            $path = $request->file('cropImage')->storeAs('public/uploads/cropImage/', $filenameToStore);
+            //$path = $request->file('cropImage')->storeAs('public/uploads/cropImage/', $filenameToStore);
         }
 
         $this->validate($request, [

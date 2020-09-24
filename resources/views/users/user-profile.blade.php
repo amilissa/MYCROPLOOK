@@ -86,7 +86,7 @@
                         </div>
 
                         <div class="col-md-6" style="font-weight:normal;">
-                        <label class="col-md-12" style="font-weight: normal;">Barangay: <b>{{$del->del_brgy,}}</b></label>
+                        <label class="col-md-12" style="font-weight: normal;">Barangay: <b>{{$del->del_brgy}}</b></label>
 
                         </div>
                       </div>

@@ -11,6 +11,30 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
+        for ($i=0; $i < 3; $i++) { 
+	    	User::create([
+	        'register_as' => '1',
+            'first_name' => str_random(8),
+            'middle_name' => str_random(8),
+            'last_name' => str_random(8),
+            'mobile_no' => '+639674485707',
+            'email' => str_random(8) . '@gmail.com',
+            'password' => bcrypt('123456'),
+	        ]);
+        }
+
+        for ($i=0; $i < 3; $i++) { 
+	    	User::create([
+	        'register_as' => '2',
+            'first_name' => str_random(8),
+            'middle_name' => str_random(8),
+            'last_name' => str_random(8),
+            'mobile_no' => '+639674485707',
+            'email' => str_random(8) . '@gmail.com',
+            'password' => bcrypt('123456'),
+	        ]);
+        }
+        
         DB::table('users')->insert([
             'register_as' => '0',
             'first_name' => 'Albert',
