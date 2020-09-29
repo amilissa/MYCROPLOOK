@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Post;
 use App\User;
+use Carbon\Carbon;
 use App\Earning;
 use App\postsUP;
 use App\PostandFarmer;
@@ -195,6 +196,7 @@ class ReservationController extends Controller
 
             $myOrders = Order::where('user_id', '=', Auth::user()->id)->orderBy('created_at', 'DESC')->take(1)->get();
 
+            $dt = new Carbon();
             $product = Post::find($id);
             $indi_order = new IndividualOrder();
             $indi_order->orders_id = $myOrders->first()->orders_id;
@@ -212,6 +214,9 @@ class ReservationController extends Controller
             $indi_order->orders_updated_at = $myOrders->first()->updated_at;
             $indi_order->user_id = $product->user_id;
             $indi_order->crop_image = $product->crop_image;
+            $indi_order->order_month = $dt->month;
+            $indi_order->order_day = $dt->day;
+            $indi_order->order_year = $dt->year;
             $indi_order->startHarvestMonth = $product->startHarvestMonth;
             $indi_order->startHarvestDay = $product->startHarvestDay;
             $indi_order->startHarvestYear = $product->startHarvestYear;

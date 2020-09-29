@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+
 use App\User;
 use App\BuyersofCrop;
 use App\Charts\prodChart;
@@ -126,8 +127,12 @@ class DashboardController extends Controller
 
     }
 
+
     public function prodStat()
     {
+        
+        $data['year_list'] = $this->fetch_year();
+
         $user_id = auth()->user()->id;
         $user = User::find($user_id);
         $profit = DashboardProfit::where('user_id', $user_id)->get();
@@ -136,7 +141,7 @@ class DashboardController extends Controller
 
         //Crop Availability
         $totalQty = farmerTotalQty::where('user_id', $user_id)
-            ->pluck('sumcropqty', 'created_at');
+            ->pluck('sumcropqty', 'crop_name');
 
         //Crop Sales Kilogram
         $salesKg = farmerChart::where('user_id', $user_id)
@@ -167,12 +172,47 @@ class DashboardController extends Controller
 
 
         return view('users/prod-statistics')
+        ->with($data)
             ->with('buyers', $user->BuyersofCrop)
             ->with('chart', $chart)
             ->with('profits', $profit)
             ->with('posts', $user->posts);
     }
+    
+    // whereYear('created_at', '=', $year)
+    // ->whereMonth('created_at', '=', $month)
+    // // ->get()
 
+    public function fetch_year() {
+
+        $data = IndividualOrder::where('user_id', auth()->user()->id)->groupBy('updated_at')->orderBy('updated_at', 'ASC')->get();
+        return $data;
+    }
+
+    // public function fetch_data(Request $request) {
+    //     if($request->input('year'))
+    //     {
+
+    //      $chart_data = $this->fetch_chart_data($request->input('year'));
+   
+    //      foreach($chart_data->toArray() as $row)
+    //      {
+       
+    //       $output[] = array(
+    //        'month'  => $row->month,
+    //        'profit' => floatval($row->profit)
+    //       );
+    //      }
+     
+    //      echo json_encode($output);
+    //     }
+    // }
+
+    // function fetch_chart_data($year)
+    // {
+    //  $data = IndividualOrder::where('user_id', auth()->user()->id)->groupBy('updated_at')->orderBy('updated_at', 'ASC')->get();
+    //  return $data;
+    // }
 
     public function getConfirmedOrders(Request $request, $conf_id)
     {

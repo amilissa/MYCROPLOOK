@@ -31,8 +31,8 @@
             <img style="height: 200px; width: 100%" class="img-responsive" src="/storage/uploads/cropImage/{{$post->crop_image}}">
             <div class="caption">
                 <h5><a href="/explore-products/{{$post->id}}" >{{$post->crop_name}}</a></h5>
-
-                <h6> Posted on {{$post->created_at}} <br> Farmer: {{$post->user->name}}</h6>
+                
+                <h6> Posted on {{$post->created_at}} <br> Farmer: {{$post->user->first_name}} {{$post->user->last_name}}</h6>
 
                 <h6>Harvest Period: {{$post->startHarvestMonth}} {{$post->startHarvestYear}} - {{$post->endHarvestMonth}} {{$post->endHarvestYear}} </h6>
                 @if($dt->year == $post->startHarvestYear)

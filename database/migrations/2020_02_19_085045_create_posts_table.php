@@ -17,7 +17,7 @@ class CreatePostsTable extends Migration
             $table->bigIncrements('id');
             $table->string('crop_name');
             $table->integer('crop_price');
-            $table->string('crop_desc');
+            $table->text('crop_desc');
             $table->integer('crop_quantity');
             $table->string('crop_status');
             $table->string('crop_image');

@@ -36,6 +36,9 @@ class CreateIndividualOrdersTable extends Migration
             $table->integer('endHarvestYear');
             $table->string('orders_buyer_name');
             $table->string('orders_address');
+            $table->string('order_month');
+            $table->string('order_day');
+            $table->string('order_year');
             $table->string('orders_mobile_no');
             $table->string('status');
 

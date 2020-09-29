@@ -14,7 +14,7 @@
         <h6>Description: {{$post->crop_desc}}</h6>
         <h6>Crop Status: {{$post->crop_status}}</h6>
         <h6>Crop Inventory: {{$post->crop_quantity}}</h6>
-        <h6>Farmer: {{$post->user->name}}</h6>
+        <h6>Farmer: {{$post->user->first_name}} {{$post->user->last_name}}</h6>
 
     </div>
     <hr>

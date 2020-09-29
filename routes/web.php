@@ -93,6 +93,7 @@ Route::get(
         'middleware' => 'auth'
     ]
 );
+Route::post('chart/fetch_data', 'DashboardController@fetch_data');
 
 //click sa place order
 Route::post(
